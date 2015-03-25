@@ -2,11 +2,9 @@
 
 ![logo](https://raw.githubusercontent.com/Build-The-Web/bootils/master/docs/_static/img/logo-64.png)
 
-Process boot-strapping utilities that support writing
-robust application/service launcher and
-process life-cycle management scripts.
-
-*Bootils* offers a ``bootils`` Python package with building blocks
+*Bootils* offers process boot-strapping utilities that support writing
+robust application/service launcher and process life-cycle management scripts.
+It is comprised of a ``bootils`` Python package with building blocks
 for robust process management, and a CLI tool named ``nanny`` that
 watches your child process after starting, until it grows up
 into a stable running state.
@@ -36,26 +34,33 @@ mounted =
 
 
 [launcher]
-classpath =
+java-classpath =
     /usr/share/java/commons-logging*.jar
     /usr/share/java/log4j*.jar
-    /usr/share/java/log4j*.jar
 
-javaagent =
+java-agents =
     /usr/share/java/jmx/jolokia-jvm-agent.jar=config=/etc/cassandra/jolokia-config.properties
 
 launch =
+    wait_for:port:12345
+    timeout:120s
     jsw:StartStopApp:/usr/lib/cassandra/cassandra.jar
-
 
 [post-check]
 logscan =
-    /var/log/cassandra/demon.log \
-        Exception OutOfMemory "WARNING: Could not open"
+    timeout:90s
+    success:Started in [0-9]+ msec
+    warn:Exception
+    warn:WARNING: Could not open
+    fail:OutOfMemory
+    file:/var/log/cassandra/demon.log
 
 commands =
-    /usr/sbin/nodetool status | grep '^U.* ${env:FACTER_IPV4} '
-    /usr/sbin/jolocas check health
+    after:10s
+    detach:/usr/sbin/jolocas watchdog
+    after:60s
+    call:/usr/sbin/nodetool status | grep '^U.* ${env:FACTER_IPV4} '
+    call:/usr/sbin/jolocas check health
 ```
 
 The pre and post checks can also be called explicitely (via the
