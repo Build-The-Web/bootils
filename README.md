@@ -14,7 +14,7 @@ into a stable running state.
 
 ### “nanny” Process Launcher and Watchdog
 
-``nanny`` can launch an application or service based on a INI-style
+``nanny`` can launch an application or service based on an INI-style
 configuration file. The following is a hopefully pretty much
 self-explanatory and totally made up example.
 
