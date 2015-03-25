@@ -5,7 +5,7 @@
 *Bootils* offers process boot-strapping utilities that support writing
 robust application/service launcher and process life-cycle management scripts.
 It is comprised of a ``bootils`` Python package with building blocks
-for robust process management, and a CLI tool named ``nanny`` that
+for process and resource management, and a CLI tool named ``nanny`` that
 watches your child process after starting, until it grows up
 into a stable running state.
 
@@ -32,6 +32,8 @@ mounted =
     /mnt/data
     /mnt/commitlog
 
+diskspace =
+    /mnt/data 30% 500G
 
 [launcher]
 java-classpath =
