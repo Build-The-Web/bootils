@@ -14,9 +14,9 @@ into a stable running state.
 
 ### “nanny” Process Launcher and Watchdog
 
-``nanny`` can launch an application or service based on an INI-style
-configuration file. The following is a hopefully pretty much
-self-explanatory and totally made up example.
+``nanny`` can launch an application or service based on an
+[INI-style configuration file](https://docs.python.org/2/library/configparser.html).
+The following is a hopefully pretty much self-explanatory and totally made up example.
 
 ```ini
 [pre-check]
