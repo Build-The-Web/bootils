@@ -66,7 +66,7 @@ commands =
 ```
 
 The pre and post checks can also be called explicitely (via the
-``--pre-check`` and ``--post-check`` options), to support some
+``pre-check`` and ``post-check`` sub-commands), to support some
 outside process launcher. In this case, the checks are performed
 as per config, and the return code reflects the outcome
 (``0`` for OK, and ``1`` for failures).
