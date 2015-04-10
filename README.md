@@ -21,6 +21,8 @@ for process and resource management, and a CLI tool named ``nanny`` that
 watches your child process after starting, until it grows up
 into a stable running state.
 
+![nanny help](https://raw.githubusercontent.com/Build-The-Web/bootils/master/docs/_static/img/nanny_help.png)
+
 
 ## Installation
 
