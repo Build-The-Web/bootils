@@ -3,10 +3,17 @@ Development Status :: 2 - Pre-Alpha
 #Development Status :: 3 - Alpha
 #Development Status :: 4 - Beta
 #Development Status :: 5 - Production/Stable
+Environment :: Console
 Intended Audience :: Developers
+Intended Audience :: System Administrators
 License :: OSI Approved :: Apache Software License
-Operating System :: OS Independent
+Operating System :: POSIX :: Linux
 Programming Language :: Python :: 2
 Programming Language :: Python :: 2.7
 Programming Language :: Python :: 3
 Programming Language :: Python :: 3.4
+Topic :: Software Development :: Libraries :: Python Modules
+Topic :: System :: Boot :: Init
+Topic :: System :: Monitoring
+Topic :: System :: Systems Administration
+Topic :: Utilities
