@@ -24,7 +24,7 @@ import sys
 import click
 
 
-__app_name__ = 'bootils'
+__app_name__ = 'nanny'
 CONTEXT_SETTINGS = dict(
     help_option_names=['-h', '--help'],
 )
