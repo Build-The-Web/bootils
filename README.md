@@ -142,6 +142,8 @@ See [CONTRIBUTING](https://github.com/Build-The-Web/bootils/blob/master/CONTRIBU
 
 * [Rituals](https://jhermann.github.io/rituals)
 * [Click](http://click.pocoo.org/)
+* [pluginbase](http://pluginbase.pocoo.org/)
+* [psutil](https://pythonhosted.org//psutil/)
 
 
 ## Acknowledgements
