@@ -2,7 +2,9 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=bad-whitespace, attribute-defined-outside-init, invalid-name
 """
-    Bootils – Process boot-strapping utilities that support writing robust application/service launcher and process life-cycle management scripts.
+    Bootils – Process boot-strapping utilities that support writing
+    robust application/service launcher and process life-cycle
+    management scripts.
 
     This setuptools script follows the DRY principle and tries to
     minimize repetition of project metadata by loading it from other
