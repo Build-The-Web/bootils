@@ -2,6 +2,7 @@
 
 ![logo](https://raw.githubusercontent.com/Build-The-Web/bootils/master/docs/_static/img/logo-64.png)
  [![Travis CI](https://api.travis-ci.org/Build-The-Web/bootils.svg)](https://travis-ci.org/Build-The-Web/bootils)
+ [![Coveralls](https://img.shields.io/coveralls/Build-The-Web/bootils.svg)](https://coveralls.io/r/Build-The-Web/bootils)
  [![GitHub Issues](https://img.shields.io/github/issues/Build-The-Web/bootils.svg)](https://github.com/Build-The-Web/bootils/issues)
  [![Ready](https://badge.waffle.io/Build-The-Web/bootils.png?label=ready&title=Ready)](https://waffle.io/Build-The-Web/bootils)
  [![In Progress](https://badge.waffle.io/Build-The-Web/bootils.png?label=in+progress&title=In+Progress)](https://waffle.io/Build-The-Web/bootils)
