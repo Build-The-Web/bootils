@@ -2,7 +2,7 @@
 # pylint: disable=bad-continuation
 """ Command line interface.
 """
-# Copyright ©  2015 1&1 Group <jh@web.de>
+# Copyright ©  2015 1&1 Group <btw-users@googlegroups.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ from __future__ import absolute_import, unicode_literals, print_function
 import re
 
 import click
+from bunch import Bunch
 
 from . import config
 
@@ -30,6 +31,7 @@ config.APP_NAME = __app_name__
 
 # The `click` custom context settings
 CONTEXT_SETTINGS = dict(
+    obj=Bunch(cfg=None, quiet=False, verbose=False),  # namespace for custom stuff
     help_option_names=['-h', '--help'],
     auto_envvar_prefix=__app_name__.upper().replace('-', '_'),
 )
@@ -40,7 +42,7 @@ def license_option(*param_decls, **attrs):
     """``--license`` option that prints license information and then exits."""
     def decorator(func):
         "decorator inner wrapper"
-        def callback(ctx, _, value):
+        def callback(ctx, _dummy, value):
             "click option callback"
             if not value or ctx.resilient_parsing:
                 return
@@ -66,14 +68,19 @@ def license_option(*param_decls, **attrs):
 @license_option()
 @click.option('-q', '--quiet', is_flag=True, default=False, help='Be quiet (show only errors).')
 @click.option('-v', '--verbose', is_flag=True, default=False, help='Create extra verbose output.')
-@click.option('-c', '--config', metavar='FILE', multiple=True, type=click.Path(), help='Load given configuration file.')
-def cli(quiet=False, verbose=False, config=None):  # pylint: disable=unused-argument, redefined-outer-name
+@click.option('-c', '--config', "config_paths", metavar='FILE',
+              multiple=True, type=click.Path(), help='Load given configuration file(s).')
+@click.pass_context
+def cli(ctx, quiet=False, verbose=False, config_paths=None):  # pylint: disable=unused-argument
     """Nanny process launcher and watchdog tool."""
+    config.Configuration.from_context(ctx, config_paths)
+    ctx.obj.quiet = quiet
+    ctx.obj.verbose = verbose
 
 
 # Import sub-commands to define them AFTER `cli` is defined
 config.cli = cli
-from . import commands as _  # pylint: disable=unused-import
+from . import commands as _  # noqa pylint: disable=unused-import
 
 if __name__ == "__main__":  # imported via "python -m"?
     __package__ = 'bootils'  # pylint: disable=redefined-builtin

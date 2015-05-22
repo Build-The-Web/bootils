@@ -2,7 +2,7 @@
 # pylint: disable=wildcard-import, unused-wildcard-import, bad-continuation
 """ Project automation for Invoke.
 """
-# Copyright ©  2015 1&1 Group <jh@web.de>
+# Copyright ©  2015 1&1 Group <btw-users@googlegroups.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -72,6 +72,6 @@ def ci(ctx):
     else:
         opts += ['test.tox']
 
-    ctx.run("invoke clean --all build --docs check --reports{} 2>&1".format(' '.join(opts)))
+    ctx.run("invoke --echo --pty clean --all build --docs check --reports{}".format(' '.join(opts)))
 
 namespace.add_task(ci)

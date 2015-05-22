@@ -6,7 +6,7 @@
         https://pytest.org/
         http://pythontesting.net/start-here/
 """
-# Copyright ©  2015 1&1 Group <jh@web.de>
+# Copyright ©  2015 1&1 Group <btw-users@googlegroups.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.

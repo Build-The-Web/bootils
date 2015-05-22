@@ -1,8 +1,9 @@
 # *- coding: utf-8 -*-
 # pylint: disable=wildcard-import, missing-docstring, no-self-use, bad-continuation
+# pylint: disable=invalid-name, redefined-outer-name, too-few-public-methods
 """ Test «some_module».
 """
-# Copyright ©  2015 1&1 Group <jh@web.de>
+# Copyright ©  2015 1&1 Group <btw-users@googlegroups.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.

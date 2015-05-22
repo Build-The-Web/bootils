@@ -2,13 +2,13 @@
 # pylint: disable=bad-continuation, unused-import
 """ CLI commands.
 """
-# Copyright ©  2015 1&1 Group <jh@web.de>
+# Copyright ©  2015 1&1 Group <btw-users@googlegroups.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#    http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -18,4 +18,4 @@
 from __future__ import absolute_import, unicode_literals, print_function
 
 # Load the command modules for registration
-from . import help  # pylint: disable=redefined-builtin
+from . import help  # noqa pylint: disable=redefined-builtin

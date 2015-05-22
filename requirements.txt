@@ -7,5 +7,9 @@ colorama
 pluginbase>=0.3,<1
 psutil==2.2.1
 
-#configobj>=5.1,<6
--e git+https://github.com/jhermann/configobj@move-to-package-32#egg=configobj
+bunch==1.0.1
+configobj>=5.0,<6
+#-e git+https://github.com/jhermann/configobj@move-to-package-32#egg=configobj
+
+rudiments==0.1.0
+#-e git+https://github.com/jhermann/rudiments#egg=rudiments

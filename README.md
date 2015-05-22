@@ -1,5 +1,7 @@
 # Bootils
 
+Process boot-strapping utilities that support writing robust application/service launcher and process life-cycle management scripts.
+
 ![logo](https://raw.githubusercontent.com/Build-The-Web/bootils/master/docs/_static/img/logo-64.png)
 Utilities for robust launcher and process life-cycle management scripts.
 
@@ -120,7 +122,14 @@ as per config, and the return code reflects the outcome
 
 ## Contributing
 
-To create a working directory for this project, call these commands:
+Contributing to this project is easy, and reporting an issue or
+adding to the documentation also improves things for every user.
+You don’t need to be a developer to contribute.
+See [CONTRIBUTING](https://github.com/Build-The-Web/bootils/blob/master/CONTRIBUTING.md) for more.
+
+As a documentation author or developer,
+to create a working directory for this project,
+call these commands:
 
 ```sh
 git clone "https://github.com/Build-The-Web/bootils.git"
@@ -129,7 +138,9 @@ cd "bootils"
 invoke build --docs test check
 ```
 
-See [CONTRIBUTING](https://github.com/Build-The-Web/bootils/blob/master/CONTRIBUTING.md) for more.
+You might also need to follow some
+[setup procedures](https://py-generic-project.readthedocs.org/en/latest/installing.html#quick-setup)
+to make the necessary basic commands available on *Linux*, *Mac OS X*, and *Windows*.
 
 
 ## References
