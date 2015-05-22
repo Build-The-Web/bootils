@@ -1,9 +1,9 @@
 {
-    "email": "jh@web.de",
+    "email": "btw-users@googlegroups.com",
     "features": "travis flake8 cli",
-    "full_name": "J\u00fcrgen Hermann",
+    "full_name": "1&1 Group",
     "github_url": "https://github.com/Build-The-Web/bootils",
-    "github_username": "jhermann",
+    "github_username": "Build-The-Web",
     "keywords": "hosted.by.github init.d startup launcher monitoring resilience watchdog log-scanner",
     "license": "Apache 2.0",
     "pkg_name": "bootils",

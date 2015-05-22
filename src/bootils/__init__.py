@@ -4,7 +4,7 @@
 """
     Bootils – Process boot-strapping utilities that support writing robust application/service launcher and process life-cycle management scripts.
 
-    Copyright ©  2015 1&1 Group <jh@web.de>
+    Copyright ©  2015 1&1 Group <btw-users@googlegroups.com>
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -23,8 +23,8 @@ from __future__ import absolute_import, unicode_literals, print_function
 __url__             = "https://github.com/Build-The-Web/bootils"
 __version__         = "0.1.0"
 __license__         = "Apache 2.0"
-__author__          = "Jürgen Hermann"
-__author_email__    = "jh@web.de"
+__author__          = "1&1 Group"
+__author_email__    = "btw-users@googlegroups.com"
 __keywords__        = "hosted.by.github init.d startup launcher monitoring resilience watchdog log-scanner"
 
 __all__ = []

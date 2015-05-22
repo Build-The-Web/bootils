@@ -5,7 +5,7 @@
 
     See http://click.pocoo.org/3/testing/
 """
-# Copyright ©  2015 1&1 Group <jh@web.de>
+# Copyright ©  2015 1&1 Group <btw-users@googlegroups.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@
 # limitations under the License.
 from __future__ import absolute_import, unicode_literals, print_function
 
+import os
 import sys
 
 import sh
@@ -29,6 +30,7 @@ from click.testing import CliRunner
 from markers import *
 from bootils import __version__ as version
 from bootils import __main__ as main
+from bootils import commands
 
 
 UsageError = sh.ErrorReturnCode_2  # pylint: disable=no-member
@@ -87,8 +89,15 @@ def test_cmd_missing():
 @cli
 def test_cmd_help():
     runner = CliRunner()
-    result = runner.invoke(main.help_command)
-    word1 = result.output.split()[0]
+    result = runner.invoke(main.cli, args=('help',))
+    if result.exit_code:
+        print(vars(result))
+        print('~' * 78)
+        print(result.output_bytes)
+        print('~' * 78)
+    words = result.output.split()
 
     assert result.exit_code == 0
-    assert word1 == 'Helpful', "Helpful message is printed"
+    assert 'configuration' in words
+    assert any(i.endswith(os.sep + 'cli.conf') for i in words), \
+           "Some '.conf' files listed in " + repr(words)

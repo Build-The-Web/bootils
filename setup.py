@@ -16,7 +16,7 @@
     uses that to provide Invoke tasks that work for any project, based on
     its project metadata.
 
-    Copyright ©  2015 1&1 Group <jh@web.de>
+    Copyright ©  2015 1&1 Group <btw-users@googlegroups.com>
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -34,9 +34,12 @@
 # Project data (the rest is parsed from __init__.py and other project files)
 name = 'bootils'
 package_name = 'bootils'
+entry_points = {}
+
 
 # ~~~ BEGIN springerle/py-generic-project ~~~
 # Stdlib imports
+import io
 import os
 import re
 import sys
@@ -72,6 +75,9 @@ class PyTest(TestCommand):
         self.test_suite = True
 
     def run_tests(self):
+        if 0 and os.environ.get('DH_VIRTUALENV_INSTALL_ROOT', None):
+            return  # disable tests during dh-virtualenv build
+
         # import locally, cause outside the eggs aren't loaded
         import pytest
         errno = pytest.main(self.pytest_args)
@@ -83,7 +89,7 @@ def _build_metadata(): # pylint: disable=too-many-locals, too-many-branches
     # Handle metadata in package source
     expected_keys = ('url', 'version', 'license', 'author', 'author_email', 'long_description', 'keywords')
     metadata = {}
-    with open(srcfile('src', package_name, '__init__.py'), encoding='utf-8') as handle:
+    with io.open(srcfile('src', package_name, '__init__.py'), encoding='utf-8') as handle:
         pkg_init = handle.read()
         # Get default long description from docstring
         metadata['long_description'] = re.search(r'^"""(.+?)^"""$', pkg_init, re.DOTALL|re.MULTILINE).group(1)
@@ -93,7 +99,8 @@ def _build_metadata(): # pylint: disable=too-many-locals, too-many-branches
                 metadata[match.group(1)] = match.group(3)
 
     if not all(i in metadata for i in expected_keys):
-        raise RuntimeError("Missing or bad metadata in '{0}' package".format(name))
+        raise RuntimeError("Missing or bad metadata in '{0}' package: {1}"
+                           .format(name, ', '.join(sorted(set(expected_keys) - set(metadata.keys()))),))
 
     text = metadata['long_description'].strip()
     if text:
@@ -112,12 +119,12 @@ def _build_metadata(): # pylint: disable=too-many-locals, too-many-branches
     for key, filename in requirements_files.items():
         requires[key] = []
         if os.path.exists(srcfile(filename)):
-            with open(srcfile(filename), encoding='utf-8') as handle:
+            with io.open(srcfile(filename), encoding='utf-8') as handle:
                 for line in handle:
                     line = line.strip()
                     if line and not line.startswith('#'):
-                        if line.startswith('-e'):
-                            line = line.split()[1].split('#egg=')[1]
+                        if any(line.startswith(i) for i in ('-e', 'http://', 'https://')):
+                            line = line.split('#egg=')[1]
                         requires[key].append(line)
     if not any('pytest' == re.split('[\t ,<=>]', i.lower())[0] for i in requires['test']):
         requires['test'].append('pytest') # add missing requirement
@@ -129,7 +136,7 @@ def _build_metadata(): # pylint: disable=too-many-locals, too-many-branches
         if '__main__.py' in files:
             path = path[len(srcfile('src') + os.sep):]
             appname = path.split(os.sep)[-1]
-            with open(srcfile('src', path, '__main__.py'), encoding='utf-8') as handle:
+            with io.open(srcfile('src', path, '__main__.py'), encoding='utf-8') as handle:
                 for line in handle.readlines():
                     match = re.match(r"""^__app_name__ += (?P<q>['"])(.+?)(?P=q)$""", line)
                     if match:
@@ -152,9 +159,10 @@ def _build_metadata(): # pylint: disable=too-many-locals, too-many-branches
     for classifiers_txt in ('classifiers.txt', 'project.d/classifiers.txt'):
         classifiers_txt = srcfile(classifiers_txt)
         if os.path.exists(classifiers_txt):
-            with open(classifiers_txt, encoding='utf-8') as handle:
+            with io.open(classifiers_txt, encoding='utf-8') as handle:
                 classifiers = [i.strip() for i in handle if i.strip() and not i.startswith('#')]
             break
+    entry_points.setdefault('console_scripts', []).extend(console_scripts)
 
     metadata.update(dict(
         name = name,
@@ -170,9 +178,7 @@ def _build_metadata(): # pylint: disable=too-many-locals, too-many-branches
         cmdclass = dict(
             test = PyTest,
         ),
-        entry_points = dict(
-            console_scripts = console_scripts,
-        ),
+        entry_points = entry_points,
     ))
     return metadata
 
@@ -180,4 +186,9 @@ def _build_metadata(): # pylint: disable=too-many-locals, too-many-branches
 project = _build_metadata()
 __all__ = ['project', 'project_root', 'package_name', 'srcfile']
 if __name__ == '__main__':
-    setup(**project)
+    if '--metadata' == sys.argv[1]:
+        import json
+        json.dump(project, sys.stdout, default=repr, indent=4, sort_keys=True)
+        sys.stdout.write('\n')
+    else:
+        setup(**project)

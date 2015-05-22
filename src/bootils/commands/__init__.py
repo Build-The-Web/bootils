@@ -1,7 +1,6 @@
-# *- coding: utf-8 -*-
-# pylint: disable=wildcard-import, missing-docstring, no-self-use, bad-continuation
-# pylint: disable=invalid-name, redefined-outer-name, too-few-public-methods
-""" Test «some_module».
+# -*- coding: utf-8 -*-
+# pylint: disable=bad-continuation, unused-import
+""" CLI commands.
 """
 # Copyright ©  2015 1&1 Group <btw-users@googlegroups.com>
 #
@@ -18,8 +17,5 @@
 # limitations under the License.
 from __future__ import absolute_import, unicode_literals, print_function
 
-from bootils import some_module
-
-
-def test_fails():
-    assert False, "This test needs to get some sensible logic"
+# Load the command modules for registration
+from . import help  # noqa pylint: disable=redefined-builtin

@@ -1,7 +1,10 @@
 # Bootils
 
+Process boot-strapping utilities that support writing robust application/service launcher and process life-cycle management scripts.
+
 ![logo](https://raw.githubusercontent.com/Build-The-Web/bootils/master/docs/_static/img/logo-64.png)
  [![Travis CI](https://api.travis-ci.org/Build-The-Web/bootils.svg)](https://travis-ci.org/Build-The-Web/bootils)
+ [![Coveralls](https://img.shields.io/coveralls/Build-The-Web/bootils.svg)](https://coveralls.io/r/Build-The-Web/bootils)
  [![GitHub Issues](https://img.shields.io/github/issues/Build-The-Web/bootils.svg)](https://github.com/Build-The-Web/bootils/issues)
  [![Ready](https://badge.waffle.io/Build-The-Web/bootils.png?label=ready&title=Ready)](https://waffle.io/Build-The-Web/bootils)
  [![In Progress](https://badge.waffle.io/Build-The-Web/bootils.png?label=in+progress&title=In+Progress)](https://waffle.io/Build-The-Web/bootils)
@@ -42,7 +45,8 @@ or just follow these instructions:
 ```sh
 cmdname=nanny
 mkdir -p ~/.bash_completion.d
-_$(tr a-z- A-Z_ <<<"$cmdname")_COMPLETE=source $cmdname >~/.bash_completion.d/$cmdname.sh
+( export _$(tr a-z- A-Z_ <<<"$cmdname")_COMPLETE=source ; \
+  $cmdname >~/.bash_completion.d/$cmdname.sh )
 grep /.bash_completion.d/$cmdname.sh ~/.bash_completion >/dev/null \
     || echo >>~/.bash_completion ". ~/.bash_completion.d/$cmdname.sh"
 . "/etc/bash_completion"
@@ -113,7 +117,14 @@ as per config, and the return code reflects the outcome
 
 ## Contributing
 
-To create a working directory for this project, call these commands:
+Contributing to this project is easy, and reporting an issue or
+adding to the documentation also improves things for every user.
+You don’t need to be a developer to contribute.
+See [CONTRIBUTING](https://github.com/Build-The-Web/bootils/blob/master/CONTRIBUTING.md) for more.
+
+As a documentation author or developer,
+to create a working directory for this project,
+call these commands:
 
 ```sh
 git clone "https://github.com/Build-The-Web/bootils.git"
@@ -122,7 +133,9 @@ cd "bootils"
 invoke build --docs test check
 ```
 
-See [CONTRIBUTING](https://github.com/Build-The-Web/bootils/blob/master/CONTRIBUTING.md) for more.
+You might also need to follow some
+[setup procedures](https://py-generic-project.readthedocs.org/en/latest/installing.html#quick-setup)
+to make the necessary basic commands available on *Linux*, *Mac OS X*, and *Windows*.
 
 
 ## References
