@@ -1,7 +1,5 @@
 # Bootils
 
-Process boot-strapping utilities that support writing robust application/service launcher and process life-cycle management scripts.
-
 ![logo](https://raw.githubusercontent.com/Build-The-Web/bootils/master/docs/_static/img/logo-64.png)
 Utilities for robust launcher and process life-cycle management scripts.
 
