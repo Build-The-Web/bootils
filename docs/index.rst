@@ -28,7 +28,8 @@ Documentation Contents
     nanny
     cfg
     api-reference
-    LICENSE
+    CONTRIBUTING
+    copyright
 
 
 Indices & Tables
