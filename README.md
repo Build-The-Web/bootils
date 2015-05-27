@@ -1,19 +1,11 @@
 # Bootils
 
-![logo](https://raw.githubusercontent.com/Build-The-Web/bootils/master/docs/_static/img/logo-64.png)
-Utilities for robust launcher and process life-cycle management scripts.
-
- [![Groups](https://img.shields.io/badge/Google_groups-btw--users-orange.svg)](https://groups.google.com/forum/#!forum/btw-users)
- [![Travis CI](https://api.travis-ci.org/Build-The-Web/bootils.svg)](https://travis-ci.org/Build-The-Web/bootils)
- [![Coveralls](https://img.shields.io/coveralls/Build-The-Web/bootils.svg)](https://coveralls.io/r/Build-The-Web/bootils)
- [![GitHub Issues](https://img.shields.io/github/issues/Build-The-Web/bootils.svg)](https://github.com/Build-The-Web/bootils/issues)
- [![Ready](https://badge.waffle.io/Build-The-Web/bootils.png?label=ready&title=Ready)](https://waffle.io/Build-The-Web/bootils)
- [![In Progress](https://badge.waffle.io/Build-The-Web/bootils.png?label=in+progress&title=In+Progress)](https://waffle.io/Build-The-Web/bootils)
- [![License](https://img.shields.io/pypi/l/bootils.svg)](https://github.com/Build-The-Web/bootils/blob/master/LICENSE)
- [![Development Status](https://pypip.in/status/bootils/badge.svg)](https://pypi.python.org/pypi/bootils/)
- [![Latest Version](https://img.shields.io/pypi/v/bootils.svg)](https://pypi.python.org/pypi/bootils/)
- [![Download format](https://pypip.in/format/bootils/badge.svg)](https://pypi.python.org/pypi/bootils/)
- [![Downloads](https://img.shields.io/pypi/dw/bootils.svg)](https://pypi.python.org/pypi/bootils/)
+![logo](https://raw.githubusercontent.com/Build-The-Web/bootils/master/docs/_static/img/logo-64.png) | Utilities for robust launcher and process life-cycle management scripts.
+:----: | :----
+**Project** | [![Groups](https://img.shields.io/badge/Google_groups-btw--users-orange.svg)](https://groups.google.com/forum/#!forum/btw-users)
+bootils) [![License](https://img.shields.io/pypi/l/bootils.svg)](https://github.com/Build-The-Web/bootils/blob/master/LICENSE) [![Development Status](https://pypip.in/status/bootils/badge.svg)](https://pypi.python.org/pypi/bootils/)
+**QA** | [![Travis CI](https://api.travis-ci.org/Build-The-Web/bootils.svg)](https://travis-ci.org/Build-The-Web/bootils) [![Coveralls](https://img.shields.io/coveralls/Build-The-Web/bootils.svg)](https://coveralls.io/r/Build-The-Web/bootils) [![GitHub Issues](https://img.shields.io/github/issues/Build-The-Web/bootils.svg)](https://github.com/Build-The-Web/bootils/issues) [![Ready](https://badge.waffle.io/Build-The-Web/bootils.png?label=ready&title=Ready)](https://waffle.io/Build-The-Web/bootils) [![In Progress](https://badge.waffle.io/Build-The-Web/bootils.png?label=in+progress&title=In+Progress)](https://waffle.io/Build-The-Web/
+**Release** | [![Latest Version](https://img.shields.io/pypi/v/bootils.svg)](https://pypi.python.org/pypi/bootils/) [![Download format](https://pypip.in/format/bootils/badge.svg)](https://pypi.python.org/pypi/bootils/) [![Downloads](https://img.shields.io/pypi/dw/bootils.svg)](https://pypi.python.org/pypi/bootils/)
 
 
 ## Overview
@@ -25,7 +17,8 @@ for process and resource management, and a CLI tool named ``nanny`` that
 watches your child process after starting, until it grows up
 into a stable running state.
 
-![nanny help](https://raw.githubusercontent.com/Build-The-Web/bootils/master/docs/_static/img/nanny_help.png)
+:books: | For more details, see the full documentation at [Read The Docs](https://bootils.readthedocs.org/).
+----: | :----
 
 
 ## Installation
