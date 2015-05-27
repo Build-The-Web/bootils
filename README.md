@@ -133,27 +133,6 @@ You might also need to follow some
 to make the necessary basic commands available on *Linux*, *Mac OS X*, and *Windows*.
 
 
-## References
-
-**Tools**
-
-* [Cookiecutter](http://cookiecutter.readthedocs.org/en/latest/)
-* [PyInvoke](http://www.pyinvoke.org/)
-* [pytest](http://pytest.org/latest/contents.html)
-* [tox](https://tox.readthedocs.org/en/latest/)
-* [Pylint](http://docs.pylint.org/)
-* [twine](https://github.com/pypa/twine#twine)
-* [bpython](http://docs.bpython-interpreter.org/)
-* [yolk3k](https://github.com/myint/yolk#yolk)
-
-**Packages**
-
-* [Rituals](https://jhermann.github.io/rituals)
-* [Click](http://click.pocoo.org/)
-* [pluginbase](http://pluginbase.pocoo.org/)
-* [psutil](https://pythonhosted.org//psutil/)
-
-
 ## Acknowledgements
 
 [![1&1](https://raw.githubusercontent.com/1and1/1and1.github.io/master/images/1and1-logo-42.png)](https://github.com/1and1)
