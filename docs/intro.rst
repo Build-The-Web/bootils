@@ -10,7 +10,7 @@ Startup scripts that come with services are commonly of the
 launch-and-abandon variety, i.e. after a demon fork was successful, the
 service is left alone and not watched from the outside.
 But quite often problems arise only late in an initialization procedure,
-and if no monitoring system or humans watches the logs and other indicators
+and if no monitoring system or human watches the logs and other indicators
 of failure, those problems go unnoticed or at least are only recognized
 far later than they could be.
 
@@ -34,14 +34,14 @@ amount of flexibility and reusability.
 Feature Overview
 ----------------
 
-  * **Plugin System** – *Bootils* has a very small core that manages a set of
-    configured plugins, both built-in and customes ones.
+  * **Plugin Architecture** – *Bootils* has a very small core that manages a set of
+    configured plugins, both built-in and custom ones.
   * **Pre-Condition Checks** – If a service depends on the availability of resources
     like mount points or disk space, you can assert they're OK, instead of noticing
     problems only after you have one more incident to handle.
   * **Facility Re-Use** – Established technologies like process supervisors,
     the `Jolokia`_ JMX bridge and so on can be integrated via plugins.
-  * **Runtime Environments** – In particular for launchine Java / JVM applications,
+  * **Runtime Environments** – In particular for launching Java / JVM applications,
     a standard runtime is provided based on the `Tanuki Java Service Wrapper`_, which
     already establishes a basic level of startup and runtime monitoring.
 
