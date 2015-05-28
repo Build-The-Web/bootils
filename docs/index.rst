@@ -61,6 +61,7 @@ References
 * `Rituals <https://jhermann.github.io/rituals>`__
 * `Click <http://click.pocoo.org/>`__
 * `pluginbase <http://pluginbase.pocoo.org/>`__
+* `pluggy <https://github.com/hpk42/pluggy/blob/master/pluggy.py#L1>`__
 * `psutil <https://pythonhosted.org//psutil/>`__
 
 
