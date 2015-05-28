@@ -4,7 +4,6 @@
 
 click>=3.3,<4
 colorama
-pluginbase>=0.3,<1
 psutil==2.2.1
 
 bunch==1.0.1
@@ -13,3 +12,6 @@ configobj>=5.0,<6
 
 rudiments==0.1.0
 #-e git+https://github.com/jhermann/rudiments#egg=rudiments
+
+pluginbase>=0.3,<1
+pluggy==0.3.0
