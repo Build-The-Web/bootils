@@ -12,6 +12,7 @@ Subpackages
 .. toctree::
 
     bootils.commands
+    bootils.plugins
     bootils.util
 
 Submodules
