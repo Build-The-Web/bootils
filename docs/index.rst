@@ -37,6 +37,7 @@ Documentation Contents
     quickstart
     nanny
     cfg
+    plugins
     api-reference
     CONTRIBUTING
     copyright
