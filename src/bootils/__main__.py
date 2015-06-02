@@ -23,6 +23,7 @@ import click
 from bunch import Bunch
 
 from . import config
+from .plugins import loader
 
 
 # Default name of the app, and its app directory
@@ -76,6 +77,7 @@ def cli(ctx, quiet=False, verbose=False, config_paths=None):  # pylint: disable=
     config.Configuration.from_context(ctx, config_paths)
     ctx.obj.quiet = quiet
     ctx.obj.verbose = verbose
+    loader.PluginLoader.load_into_context(ctx)
 
 
 # Import sub-commands to define them AFTER `cli` is defined

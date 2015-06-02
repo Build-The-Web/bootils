@@ -52,6 +52,15 @@ def help_command(ctx, config_dump=False):
         u'\n    '.join(u'{}   {}'.format(*i) for i in locations),
     ))
 
+    banner('Plugins')
+    locations = [(u'✔' if os.path.exists(i) else u'✘', click.pretty_path(i)) for i in ctx.obj.plugins.searchpath]
+    click.echo(u'Plugin search path:\n    {0}'.format(
+        u'\n    '.join(u'{}   {}'.format(*i) for i in locations),
+    ))
+    click.echo(u'\nThe following plugins are available:\n    {0}'.format(
+        u'\n    '.join(str(i) for i in ctx.obj.plugins.available),
+    ))
+
     banner('More Help')
     click.echo("Call '{} --help' to get a list of available commands & options.".format(app_name))
     click.echo("Call '{} «command» --help' to get help on a specific command.".format(app_name))

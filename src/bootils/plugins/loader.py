@@ -23,8 +23,9 @@ import sys
 import pluggy
             # XXX: pluggy.PluginManager, pluggy.PluginValidationError, pluggy.HookimplMarker, pluggy.HookspecMarker
 from pluginbase import PluginBase
+from rudiments.reamed import click
 
-# from . import …
+from .._compat import encode_filename as to_apistr
 
 
 class BootilsHooks(object):
@@ -44,17 +45,23 @@ class PluginLoader(object):
         Load and manage plugins, both core and custom ones.
     """
     # Default places to look at
-    DEFAULT_PLUGIN_PATH = ['/etc/bootils/plugin.d', '{appdir}/plugin.d']
+    DEFAULT_PLUGIN_PATH = ['/etc/{appname}/plugin.d', '{appdir}/plugin.d']
 
-    @class_method
+    @classmethod
     def load_into_context(cls, ctx):
+        """ Discovers plugins and places a PluginLoader instance in ``ctx.obj.plugins``.
         """
-        """
+        ctx.obj.plugins = cls(ctx.obj.cfg, appname=ctx.find_root().info_name)
+        return ctx.obj.plugins
 
-    def __init__(self):
-        self.plugins = []
-        self._custom = PluginBase(package='bootils.plugins.custom')
-        self._source = self._custom.make_plugin_source(searchpath=self.DEFAULT_PLUGIN_PATH)
+    def __init__(self, cfg, appname):
+        self.searchpath = [i.format(appname=appname, appdir=click.get_app_dir(appname))
+                           for i in self.DEFAULT_PLUGIN_PATH]
+        # TODO: add some env var path
+
+        self.available = []
+        self._custom = PluginBase(package=to_apistr('bootils.plugins.custom'))
+        self._source = self._custom.make_plugin_source(searchpath=self.searchpath)
         #self._source.list_plugins()
 
 
