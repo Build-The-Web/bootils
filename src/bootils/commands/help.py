@@ -58,7 +58,7 @@ def help_command(ctx, config_dump=False):
         u'\n    '.join(u'{}   {}'.format(*i) for i in locations),
     ))
     click.echo(u'\nThe following plugins are available:\n    {0}'.format(
-        u'\n    '.join(str(i) for i in ctx.obj.plugins.available),
+        u'\n    '.join(str(i) for i in ctx.obj.plugins.discover()),
     ))
 
     banner('More Help')
