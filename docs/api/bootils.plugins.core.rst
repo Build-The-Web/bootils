@@ -6,3 +6,15 @@ bootils.plugins.core package
     :undoc-members:
     :show-inheritance:
 
+Submodules
+----------
+
+bootils.plugins.core.filesystem module
+--------------------------------------
+
+.. automodule:: bootils.plugins.core.filesystem
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
