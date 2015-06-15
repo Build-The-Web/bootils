@@ -14,4 +14,4 @@ rudiments==0.1.0
 #-e git+https://github.com/jhermann/rudiments#egg=rudiments
 
 pluginbase>=0.3,<1
-pluggy==0.3.0
+#pluggy==0.3.0

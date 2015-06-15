@@ -3,6 +3,6 @@
 #
 
 # this is somehow dynamically imported / required, but only on RTD
-CommonMark>=0.5.4
+#CommonMark>=0.5.4
 
 -r ../requirements.txt
