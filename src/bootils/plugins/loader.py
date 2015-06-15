@@ -20,7 +20,7 @@ from __future__ import absolute_import, unicode_literals, print_function
 import os
 import sys
 
-import pluggy
+##import pluggy
             # XXX: pluggy.PluginManager, pluggy.PluginValidationError, pluggy.HookimplMarker, pluggy.HookspecMarker
 from pluginbase import PluginBase
 from rudiments.reamed import click
