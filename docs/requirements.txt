@@ -2,4 +2,7 @@
 # "Read The Docs" requirements
 #
 
+# this is somehow dynamically imported, but only on RTD
+entitytrans
+
 -r ../requirements.txt
