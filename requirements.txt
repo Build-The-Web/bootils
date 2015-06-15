@@ -13,5 +13,5 @@ configobj>=5.0,<6
 rudiments==0.1.0
 #-e git+https://github.com/jhermann/rudiments#egg=rudiments
 
-pluginbase>=0.3,<1
+#pluginbase>=0.3,<1
 #pluggy==0.3.0

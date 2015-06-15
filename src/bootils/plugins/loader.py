@@ -22,7 +22,7 @@ import sys
 
 ##import pluggy
             # XXX: pluggy.PluginManager, pluggy.PluginValidationError, pluggy.HookimplMarker, pluggy.HookspecMarker
-from pluginbase import PluginBase
+##from pluginbase import PluginBase
 from rudiments.reamed import click
 
 from .._compat import encode_filename as to_apistr
@@ -60,16 +60,16 @@ class PluginLoader(object):
         # TODO: add some env var path
 
         self._available = []
-        self._custom = PluginBase(package=to_apistr('bootils.plugins.custom'))
-        self._source = self._custom.make_plugin_source(searchpath=self.searchpath)
+        self._custom = None ##PluginBase(package=to_apistr('bootils.plugins.custom'))
+        self._source = None ##self._custom.make_plugin_source(searchpath=self.searchpath)
 
     def discover(self):
         """ Inspect the given search path and import any plugins found.
 
             Returns the list of plugins.
         """
-        if not self._available:
-            self._available = self._source.list_plugins()
+        ##if not self._available:
+        ##    self._available = self._source.list_plugins()
         return self._available
 
 
