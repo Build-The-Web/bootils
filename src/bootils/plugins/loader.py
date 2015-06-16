@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=bad-continuation
-""" Short description.
+""" Plugin management.
 """
 # Copyright ©  2015 1&1 Group <btw-users@googlegroups.com>
 #
@@ -19,18 +19,27 @@ from __future__ import absolute_import, unicode_literals, print_function
 
 import os
 import sys
+import inspect
+import pkgutil
 
-##import pluggy
-            # XXX: pluggy.PluginManager, pluggy.PluginValidationError, pluggy.HookimplMarker, pluggy.HookspecMarker
-##from pluginbase import PluginBase
 from rudiments.reamed import click
 
 from .._compat import encode_filename as to_apistr
+from . import core
 
 
-class BootilsHooks(object):
+def _find_plugin_classes(modules):
+    """Find plugin classes in namespaces of discovered modules."""
+    for module in modules:
+        for name, obj in vars(module).items():
+            if not name.startswith('_') and inspect.isclass(obj) and issubclass(obj, PluginBase) \
+                    and obj.__module__ == module.__name__:
+                yield obj
+
+
+class PluginBase(object):
     """
-        Hook specification.
+        Base class for plugins.
     """
 
 
@@ -43,6 +52,10 @@ class PluginContext(object):
 class PluginLoader(object):
     """
         Load and manage plugins, both core and custom ones.
+
+        See also `Package Discovery and Resource Access using pkg_resources`_.
+
+        .. _`Package Discovery and Resource Access using pkg_resources`: https://pythonhosted.org/setuptools/pkg_resources.html
     """
     # Default places to look at
     DEFAULT_PLUGIN_PATH = ['/etc/{appname}/plugin.d', '{appdir}/plugin.d']
@@ -60,16 +73,21 @@ class PluginLoader(object):
         # TODO: add some env var path
 
         self._available = []
-        self._custom = None ##PluginBase(package=to_apistr('bootils.plugins.custom'))
-        self._source = None ##self._custom.make_plugin_source(searchpath=self.searchpath)
 
     def discover(self):
         """ Inspect the given search path and import any plugins found.
 
-            Returns the list of plugins.
+            Returns the list of plugin classes.
         """
-        ##if not self._available:
-        ##    self._available = self._source.list_plugins()
+        modules = []
+
+        # Load core plugin modules
+        for _, name, is_pkg in pkgutil.iter_modules(core.__path__):
+            if name.startswith('_') or is_pkg:
+                continue
+            modules.append(__import__(core.__name__ + '.' + name, globals(), {}, ['__file__']))
+
+        self._available = list(_find_plugin_classes(modules))
         return self._available
 
 
