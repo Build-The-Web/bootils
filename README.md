@@ -133,6 +133,11 @@ You might also need to follow some
 to make the necessary basic commands available on *Linux*, *Mac OS X*, and *Windows*.
 
 
+## Similar Projects
+
+ * [procdog](https://github.com/jlevy/procdog) – Lightweight command-line process control.
+
+
 ## Acknowledgements
 
 [![1&1](https://raw.githubusercontent.com/1and1/1and1.github.io/master/images/1and1-logo-42.png)](https://github.com/1and1)
