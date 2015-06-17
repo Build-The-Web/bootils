@@ -25,3 +25,7 @@ from ..loader import PluginBase
 
 class FileSystem(PluginBase):
     """File system checks."""
+
+    def pre_check(self):
+        """Perform pre-launch checks."""
+        self.context.add_result(True, self.name, "filesystem")  # XXX: dummy for testing

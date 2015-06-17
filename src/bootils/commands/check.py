@@ -23,6 +23,7 @@ import sys
 from rudiments.reamed import click
 
 from .. import config
+from ..plugins import loader
 
 
 CHECK_RESULT_FORMATS = ['text', 'tap', 'json', 'yaml']
@@ -42,3 +43,9 @@ def check(ctx, format, name):
     """
     # TODO: 'check' implementation
     print((format, name))
+
+    executor = loader.PluginExecutor(ctx.obj.plugins)
+    executor.pre_checks()
+
+    for result in executor.context.results:
+        print(result)

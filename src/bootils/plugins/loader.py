@@ -22,6 +22,7 @@ import sys
 import inspect
 import pkgutil
 
+from bunch import Bunch
 from rudiments.reamed import click
 
 from .._compat import encode_filename as to_apistr
@@ -38,15 +39,38 @@ def _find_plugin_classes(modules):
 
 
 class PluginBase(object):
+    """ Base class for plugins.
     """
-        Base class for plugins.
-    """
+
+    def __init__(self, context):
+        self.config = {}
+        self.context = context
+
+    @property
+    def name(self):
+        return self.__class__.__name__
+
+    def configure(self, config):
+        """Store plugin-specific configuration."""
+        self.config = config
+
+    def pre_check(self):
+        """Perform pre-launch checks."""
+
+    def post_check(self):
+        """Perform post-launch checks."""
 
 
 class PluginContext(object):
+    """ State held by plugins.
     """
-        State held by plugins.
-    """
+
+    def __init__(self):
+        self.results = []
+
+    def add_result(self, state, name, comment):
+        """Store a check result."""
+        self.results.append((state, name, comment))
 
 
 class PluginLoader(object):
@@ -68,6 +92,7 @@ class PluginLoader(object):
         return ctx.obj.plugins
 
     def __init__(self, cfg, appname):
+        self.cfg = cfg
         self.searchpath = [i.format(appname=appname, appdir=click.get_app_dir(appname))
                            for i in self.DEFAULT_PLUGIN_PATH]
         # TODO: add some env var path
@@ -87,6 +112,9 @@ class PluginLoader(object):
                 continue
             modules.append(__import__(core.__name__ + '.' + name, globals(), {}, ['__file__']))
 
+        # TODO: load custom plugins from entry points
+        # TODO: load custom plugins from plugin path
+
         self._available = list(_find_plugin_classes(modules))
         return self._available
 
@@ -95,3 +123,26 @@ class PluginExecutor(object):
     """
         Call plugin hooks in different life-cycle phases.
     """
+
+    def __init__(self, loader):
+        self.loader = loader
+        self.context = PluginContext()
+        self.plugins = [cls(self.context) for cls in self.loader.discover()]
+        self.configure()
+
+    def configure(self):
+        """Assemble configuration for each plugin and pass it on."""
+        for plugin in self.plugins:
+            plugin_cfg = Bunch(pre_check={}, launch={}, post_check={})
+            # TODO: actually implement configuration collection
+            plugin.configure(plugin_cfg)
+
+    def pre_checks(self):
+        """Perform pre-launch checks."""
+        for plugin in self.plugins:
+            plugin.pre_check()
+
+    def post_checks(self):
+        """Perform post-launch checks."""
+        for plugin in self.plugins:
+            plugin.post_check()
