@@ -74,10 +74,10 @@ def license_option(*param_decls, **attrs):
 @click.pass_context
 def cli(ctx, quiet=False, verbose=False, config_paths=None):  # pylint: disable=unused-argument
     """Nanny process launcher and watchdog tool."""
-    config.Configuration.from_context(ctx, config_paths)
+    config.Configuration.from_context(ctx, config_paths, project='bootils')
     ctx.obj.quiet = quiet
     ctx.obj.verbose = verbose
-    loader.PluginLoader.load_into_context(ctx)
+    loader.PluginLoader.load_into_context(ctx, project='bootils')
 
 
 # Import sub-commands to define them AFTER `cli` is defined

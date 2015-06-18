@@ -85,10 +85,10 @@ class PluginLoader(object):
     DEFAULT_PLUGIN_PATH = ['/etc/{appname}/plugin.d', '{appdir}/plugin.d']
 
     @classmethod
-    def load_into_context(cls, ctx):
+    def load_into_context(cls, ctx, project=None):
         """ Discovers plugins and places a PluginLoader instance in ``ctx.obj.plugins``.
         """
-        ctx.obj.plugins = cls(ctx.obj.cfg, appname=ctx.find_root().info_name)
+        ctx.obj.plugins = cls(ctx.obj.cfg, appname=project or ctx.find_root().info_name)
         return ctx.obj.plugins
 
     def __init__(self, cfg, appname):
