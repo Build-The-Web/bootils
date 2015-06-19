@@ -20,6 +20,7 @@ from __future__ import absolute_import, unicode_literals, print_function
 import os
 import sys
 
+from ..._compat import encode_filename
 from ..loader import PluginBase
 
 
@@ -28,4 +29,7 @@ class FileSystem(PluginBase):
 
     def pre_check(self):
         """Perform pre-launch checks."""
-        self.context.add_result(True, self.name, "filesystem")  # XXX: dummy for testing
+        ##import pprint; print('\n'.join(pprint.pformat(i) for i in self.cfg.items()))
+
+        for path in self.cfg_list('exists'):
+            self.context.add_result(os.path.exists(encode_filename(path)), self.name, "exists '{}'".format(path))

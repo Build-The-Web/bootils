@@ -43,16 +43,21 @@ class PluginBase(object):
     """
 
     def __init__(self, context):
-        self.config = {}
+        self.cfg = {}
         self.context = context
 
     @property
     def name(self):
         return self.__class__.__name__
 
+    def cfg_list(self, key, section=None):
+        """Get a config value as a list."""
+        section = section or self.context.phase
+        return [i.strip() for i in self.cfg[section].get(key, '').strip().splitlines()]
+
     def configure(self, config):
         """Store plugin-specific configuration."""
-        self.config = config
+        self.cfg = config
 
     def pre_check(self):
         """Perform pre-launch checks."""
@@ -66,6 +71,7 @@ class PluginContext(object):
     """
 
     def __init__(self):
+        self.phase = None
         self.results = []
 
     def add_result(self, state, name, comment):
@@ -150,10 +156,12 @@ class PluginExecutor(object):
 
     def pre_checks(self):
         """Perform pre-launch checks."""
+        self.context.phase = 'pre_check'
         for plugin in self.plugins:
             plugin.pre_check()
 
     def post_checks(self):
         """Perform post-launch checks."""
+        self.context.phase = 'post_check'
         for plugin in self.plugins:
             plugin.post_check()
