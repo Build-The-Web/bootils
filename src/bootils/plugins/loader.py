@@ -132,9 +132,11 @@ class PluginExecutor(object):
 
     def configure(self):
         """Assemble configuration for each plugin and pass it on."""
+        cfg = self.loader.cfg.load()
         for plugin in self.plugins:
-            plugin_cfg = Bunch(pre_check={}, launch={}, post_check={})
-            # TODO: actually implement configuration collection
+            plugin_cfg = Bunch(pre_check={}, launcher={}, post_check={})
+            for key, section in plugin_cfg.items():
+                section.update(cfg.get(key.replace('_', '-'), {}))
             plugin.configure(plugin_cfg)
 
     def pre_checks(self):
