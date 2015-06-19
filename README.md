@@ -133,9 +133,13 @@ You might also need to follow some
 to make the necessary basic commands available on *Linux*, *Mac OS X*, and *Windows*.
 
 
-## Similar Projects
+## Similar and Related Projects
 
  * [procdog](https://github.com/jlevy/procdog) – Lightweight command-line process control.
+ * [supervisor](https://github.com/Supervisor/supervisor)
+ * [runit](http://smarden.org/runit/)
+ * [systemd](http://www.freedesktop.org/wiki/Software/systemd/)
+ * [upstart](http://upstart.ubuntu.com/)
 
 
 ## Acknowledgements
