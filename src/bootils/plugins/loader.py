@@ -136,7 +136,16 @@ class PluginExecutor(object):
         for plugin in self.plugins:
             plugin_cfg = Bunch(pre_check={}, launcher={}, post_check={})
             for key, section in plugin_cfg.items():
-                section.update(cfg.get(key.replace('_', '-'), {}))
+                cfg_section = cfg.get(key.replace('_', '-'), {})
+                section.update(cfg_section)
+                section.update(cfg_section.get(plugin.name, {}))
+
+            # Remove unrelated subsections
+            for section in plugin_cfg.values():
+                for key in section.keys()[:]:
+                    if isinstance(section[key], dict):
+                        del section[key]
+
             plugin.configure(plugin_cfg)
 
     def pre_checks(self):
