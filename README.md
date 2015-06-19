@@ -58,49 +58,62 @@ The following is a hopefully pretty much self-explanatory and totally made up ex
 
 ```ini
 [pre-check]
-packages =
+
+[[Machine]]
+packages = """
     oracle-java8-jre | oracle-java8-installer
     java-service-wrapper
     jolokia-jvm-agent
+"""
 
-exists =
+[[FileSystem]]
+
+exists = """
     /etc/cassandra/jolokia-config.properties
+"""
 
-mounted =
+mounted = """
     /mnt/data
     /mnt/commitlog
+"""
 
-diskspace =
+diskspace = """
     /mnt/data 30% 500G
+"""
 
 [launcher]
-java-classpath =
+java-classpath = """
     /usr/share/java/commons-logging*.jar
     /usr/share/java/log4j*.jar
+"""
 
-java-agents =
+java-agents = """
     /usr/share/java/jmx/jolokia-jvm-agent.jar=config=/etc/cassandra/jolokia-config.properties
+"""
 
-launch =
+launch = """
     wait_for:port:12345
     timeout:120s
     jsw:StartStopApp:/usr/lib/cassandra/cassandra.jar
+"""
 
 [post-check]
-logscan =
+logscan = """
     timeout:90s
     success:Started in [0-9]+ msec
     warn:Exception
     warn:WARNING: Could not open
     fail:OutOfMemory
     file:/var/log/cassandra/demon.log
+"""
 
-commands =
+commands = """
     after:10s
     detach:/usr/sbin/jolocas watchdog
     after:60s
     call:/usr/sbin/nodetool status | grep '^U.* ${env:FACTER_IPV4} '
     call:/usr/sbin/jolocas check health
+"""
 ```
 
 The pre and post checks can also be called explicitely (via the
