@@ -149,6 +149,8 @@ to make the necessary basic commands available on *Linux*, *Mac OS X*, and *Wind
 ## Similar and Related Projects
 
  * [procdog](https://github.com/jlevy/procdog) – Lightweight command-line process control.
+ * [mirakuru](https://github.com/ClearcodeHQ/mirakuru) – Starts a process, and waits for clear indication that it's running.
+ * [ianitor](https://github.com/ClearcodeHQ/ianitor) – Doorkeeper for Consul discovered services.
  * [supervisor](https://github.com/Supervisor/supervisor)
  * [runit](http://smarden.org/runit/)
  * [systemd](http://www.freedesktop.org/wiki/Software/systemd/)
