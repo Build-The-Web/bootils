@@ -110,7 +110,7 @@ class CheckFormatter(object):
 
     def _to_csv(self, result):
         """CSV formatter."""
-        buf = StringIO.StringIO()
+        buf = StringIO()
         writer = csv.writer(buf)
         if self.index == 0:
             writer.writerow([i.capitalize() for i in result._asdict().keys()])
