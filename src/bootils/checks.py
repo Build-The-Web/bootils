@@ -18,15 +18,17 @@
 from __future__ import absolute_import, unicode_literals, print_function
 
 import sys
+import csv
 import json
+import StringIO
 from collections import namedtuple, OrderedDict
 
 import yaml
 
 
-CHECK_RESULT_FORMATS = ['text', 'tap', 'json', 'yaml']
+CHECK_RESULT_FORMATS = ['text', 'tap', 'json', 'yaml', 'csv']
 
-CheckResult = namedtuple('CheckResult', 'ok name comment')
+CheckResult = namedtuple('CheckResult', 'ok name comment diagnostics')
 
 
 # XXX: Put that elsewhere
@@ -68,7 +70,8 @@ class CheckFormatter(object):
         text=('', '\n', '\n'),
         tap=('', '\n', '\n'),
         json=('[\n', ',\n', '\n]\n'),
-        yaml=('', '', '')
+        yaml=('', '', ''),
+        csv=('', '', ''),
     )
 
     def __init__(self, formatting='text', stream=None):
@@ -85,7 +88,16 @@ class CheckFormatter(object):
 
     def _to_tap(self, result):
         """TAP formatter."""
-        return repr(result)
+        lines = ['{ok} {num} {name} {comment}'.format(
+            ok='ok' if result.ok else 'not ok', num=self.index+1, name=result.name, comment=result.comment,
+        )]
+        if result.diagnostics:
+            try:
+                diagnostics = result.diagnostics.splitlines()
+            except AttributeError:
+                diagnostics = result.diagnostics
+            lines.extend(['# ' + i for i in diagnostics])
+        return '\n'.join(lines)
 
     def _to_json(self, result):
         """JSON formatter."""
@@ -94,6 +106,15 @@ class CheckFormatter(object):
     def _to_yaml(self, result):
         """YAML formatter."""
         return yaml.safe_dump([result._asdict()])
+
+    def _to_csv(self, result):
+        """CSV formatter."""
+        buf = StringIO.StringIO()
+        writer = csv.writer(buf)
+        if self.index == 0:
+            writer.writerow([i.capitalize() for i in result._asdict().keys()])
+        writer.writerow(result)
+        return buf.getvalue()
 
     def write(self, text):
         self.stream.write(text)
@@ -106,3 +127,5 @@ class CheckFormatter(object):
 
     def close(self):
         self.write(self.GLUE[self.formatting][2])
+        if self.formatting == 'tap':
+            self.write('1..{}\n'.format(self.index))

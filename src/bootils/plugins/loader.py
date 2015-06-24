@@ -56,9 +56,9 @@ class PluginBase(object):
         section = section or self.context.phase
         return [i.strip() for i in self.cfg[section].get(key, '').strip().splitlines()]
 
-    def result(self, ok, name, comment):
-        """Create :py:ref:`` with a qualified name."""
-        return checks.CheckResult(ok, '{}:{}'.format(self.name, name), comment)
+    def result(self, ok, name, comment, diagnostics=None):
+        """Create :py:ref:`checks.CheckResult` with a qualified name."""
+        return checks.CheckResult(ok, '{}:{}'.format(self.name, name), comment, diagnostics)
 
     def configure(self, config):
         """Store plugin-specific configuration."""
