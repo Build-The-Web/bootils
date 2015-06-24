@@ -32,4 +32,4 @@ class FileSystem(PluginBase):
         ##import pprint; print('\n'.join(pprint.pformat(i) for i in self.cfg.items()))
 
         for path in self.cfg_list('exists'):
-            self.context.add_result(os.path.exists(encode_filename(path)), self.name, "exists '{}'".format(path))
+            yield self.result(os.path.exists(encode_filename(path)), 'exists', path)

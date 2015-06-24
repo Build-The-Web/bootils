@@ -22,15 +22,12 @@ import sys
 
 from rudiments.reamed import click
 
-from .. import config
+from .. import config, checks
 from ..plugins import loader
 
 
-CHECK_RESULT_FORMATS = ['text', 'tap', 'json', 'yaml']
-
-
 @config.cli.command()
-@click.option('-f', '--format', type=click.Choice(CHECK_RESULT_FORMATS), default=CHECK_RESULT_FORMATS[0],
+@click.option('-f', '--format', type=click.Choice(checks.CHECK_RESULT_FORMATS), default=checks.CHECK_RESULT_FORMATS[0],
     help="Output format to use for reporting check results.")
 @click.argument('name', metavar='[‹name›]', nargs=1, default='default')
 @click.pass_context
@@ -41,11 +38,13 @@ def check(ctx, format, name):
         The special name 'all' will perform checks for all configured services,
         if you have several defined on a machine.
     """
-    # TODO: 'check' implementation
-    print((format, name))
-
+    rc = 0
     executor = loader.PluginExecutor(ctx.obj.plugins)
-    executor.pre_checks()
-
-    for result in executor.context.results:
-        print(result)
+    formatter = checks.CheckFormatter(format)
+    for result in executor.pre_checks():
+        formatter.dump(result)
+        if not result.ok:
+            rc = 1
+    formatter.close()
+    if rc:
+        sys.exit(rc)

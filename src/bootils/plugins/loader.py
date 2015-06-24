@@ -26,6 +26,7 @@ from bunch import Bunch
 from rudiments.reamed import click
 
 from .._compat import encode_filename as to_apistr
+from .. import checks
 from . import core
 
 
@@ -55,15 +56,19 @@ class PluginBase(object):
         section = section or self.context.phase
         return [i.strip() for i in self.cfg[section].get(key, '').strip().splitlines()]
 
+    def result(self, ok, name, comment):
+        """Create :py:ref:`` with a qualified name."""
+        return checks.CheckResult(ok, '{}:{}'.format(self.name, name), comment)
+
     def configure(self, config):
         """Store plugin-specific configuration."""
         self.cfg = config
 
     def pre_check(self):
-        """Perform pre-launch checks."""
+        """Perform pre-launch checks and generate results."""
 
     def post_check(self):
-        """Perform post-launch checks."""
+        """Perform post-launch checks and generate results."""
 
 
 class PluginContext(object):
@@ -73,10 +78,6 @@ class PluginContext(object):
     def __init__(self):
         self.phase = None
         self.results = []
-
-    def add_result(self, state, name, comment):
-        """Store a check result."""
-        self.results.append((state, name, comment))
 
 
 class PluginLoader(object):
@@ -158,10 +159,12 @@ class PluginExecutor(object):
         """Perform pre-launch checks."""
         self.context.phase = 'pre_check'
         for plugin in self.plugins:
-            plugin.pre_check()
+            for result in plugin.pre_check():
+                yield result
 
     def post_checks(self):
         """Perform post-launch checks."""
         self.context.phase = 'post_check'
         for plugin in self.plugins:
-            plugin.post_check()
+            for result in plugin.post_check():
+                yield result

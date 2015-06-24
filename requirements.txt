@@ -12,3 +12,5 @@ configobj>=5.0,<6
 
 #rudiments==0.2.0
 -e git+https://github.com/jhermann/rudiments#egg=rudiments
+
+PyYAML
