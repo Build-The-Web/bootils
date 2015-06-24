@@ -20,10 +20,11 @@ from __future__ import absolute_import, unicode_literals, print_function
 import sys
 import csv
 import json
-import StringIO
 from collections import namedtuple, OrderedDict
 
 import yaml
+
+from ._compat import StringIO
 
 
 CHECK_RESULT_FORMATS = ['text', 'tap', 'json', 'yaml', 'csv']
