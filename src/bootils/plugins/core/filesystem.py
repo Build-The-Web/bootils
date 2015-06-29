@@ -72,7 +72,10 @@ class FileSystem(PluginBase):
         ##import pprint; print('\n'.join(pprint.pformat(i) for i in self.cfg.items()))
 
         for path in self.cfg_list('exists'):
-            yield self.result(os.path.exists(encode_filename(path)), 'exists', path)
+            try:
+                yield self.result(os.path.exists(encode_filename(path)), 'exists', path)
+            except OSError as cause:
+                yield self.result(False, 'exists', path, diagnostics=str(cause))
 
         for path in self.cfg_list('mounted'):
             try:
