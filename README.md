@@ -77,7 +77,7 @@ mounted = """
     /mnt/commitlog
 """
 
-diskspace = """
+diskfree = """
     /mnt/data 30% 500G
 """
 

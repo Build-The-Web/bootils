@@ -19,9 +19,44 @@ from __future__ import absolute_import, unicode_literals, print_function
 
 import os
 import sys
+import shlex
+
+import psutil
 
 from ..._compat import encode_filename
 from ..loader import PluginBase
+
+
+def diskfree_result(spec):
+    """Return result of a single disk usage check."""
+    diagnostics = []
+    parts = shlex.split(spec)
+    path, parts = parts[0], parts[1:]
+    usage = psutil.disk_usage(path)
+    # -> sdiskusage(total=112263569408, used=59510784000, free=47026511872, percent=53.0)
+
+    ok = True
+    for threshold in parts:
+        try:
+            if threshold.isdigit():
+                expected = int(threshold, 10)
+            elif threshold.endswith('%'):
+                expected = usage.total * int(threshold[:-1], 10) / 100.0
+            else:
+                # XXX: add parsing for sizes with units
+                raise ValueError("Unknown format / not a number")
+        except (ValueError, TypeError) as cause:
+            ok = False
+            diagnostics.append("Unparsable threshold {threshold!r}: {cause}"
+                               .format(threshold=threshold, cause=cause))
+        else:
+            if usage.free < expected:
+                ok = False
+                diagnostics.append("violated {threshold} condition (free={free} {percent}%)"
+                                   .format(threshold=threshold, free=usage.free, percent=100.0 - usage.percent))
+
+    # TODO: format "usage" to IEC binary units (http://physics.nist.gov/cuu/Units/binary.html)
+    return ok, 'diskfree', '{spec} [{usage}]'.format(spec=spec, usage=usage), '\n'.join(diagnostics)
 
 
 class FileSystem(PluginBase):
@@ -33,3 +68,6 @@ class FileSystem(PluginBase):
 
         for path in self.cfg_list('exists'):
             yield self.result(os.path.exists(encode_filename(path)), 'exists', path)
+
+        for spec in self.cfg_list('diskfree'):
+            yield self.result(*diskfree_result(spec))
