@@ -27,6 +27,11 @@ from ..._compat import encode_filename
 from ..loader import PluginBase
 
 
+def on_same_fs(path1, path2):
+    """Check if two paths reside in the same file system."""
+    return os.stat(encode_filename(path1)).st_dev == os.stat(encode_filename(path2)).st_dev
+
+
 def diskfree_result(spec):
     """Return result of a single disk usage check."""
     diagnostics = []
@@ -68,6 +73,15 @@ class FileSystem(PluginBase):
 
         for path in self.cfg_list('exists'):
             yield self.result(os.path.exists(encode_filename(path)), 'exists', path)
+
+        for path in self.cfg_list('mounted'):
+            try:
+                mounted = not on_same_fs(path, '/')
+            except OSError as cause:
+                yield self.result(False, 'mounted', path, diagnostics=str(cause))
+            else:
+                yield self.result(mounted, 'mounted', path,
+                                  diagnostics=None if mounted else 'path resides in root file system')
 
         for spec in self.cfg_list('diskfree'):
             yield self.result(*diskfree_result(spec))
