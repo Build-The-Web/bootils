@@ -75,13 +75,22 @@ class CheckFormatter(object):
         csv=('', '', ''),
     )
 
-    def __init__(self, formatting='text', stream=None):
+    def __init__(self, formatting='text', stream=None, verbose=False):
         """ Dump results to given stream or stdout according to ``formatting``.
         """
         self.formatting = formatting
         self.stream = stream or sys.stdout
+        self.verbose = verbose
         self.index = 0
         self._formatter = getattr(self, '_to_' + formatting)
+
+    def _asdict(self, result):
+        """Return a CheckResult as a dict."""
+        result_dict = result._asdict()
+        if not self.verbose:
+            result_dict = result_dict.copy()
+            del result_dict['diagnostics']
+        return result_dict
 
     def _to_text(self, result):
         """Text formatter."""
@@ -92,7 +101,7 @@ class CheckFormatter(object):
         lines = ['{ok} {num} {name} {comment}'.format(
             ok='ok' if result.ok else 'not ok', num=self.index+1, name=result.name, comment=result.comment,
         )]
-        if result.diagnostics:
+        if result.diagnostics and self.verbose:
             try:
                 diagnostics = result.diagnostics.splitlines()
             except AttributeError:
@@ -102,19 +111,19 @@ class CheckFormatter(object):
 
     def _to_json(self, result):
         """JSON formatter."""
-        return json.dumps(result._asdict())
+        return json.dumps(self._asdict(result))
 
     def _to_yaml(self, result):
         """YAML formatter."""
-        return yaml.safe_dump([result._asdict()])
+        return yaml.safe_dump([self._asdict(result)])
 
     def _to_csv(self, result):
         """CSV formatter."""
         buf = StringIO()
         writer = csv.writer(buf)
         if self.index == 0:
-            writer.writerow([i.capitalize() for i in result._asdict().keys()])
-        writer.writerow(result)
+            writer.writerow([i.capitalize() for i in self._asdict(result).keys()])
+        writer.writerow(result[:4 if self.verbose else 3])
         return buf.getvalue()
 
     def write(self, text):

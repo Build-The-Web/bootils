@@ -40,7 +40,7 @@ def check(ctx, format, name):
     """
     rc = 0
     executor = loader.PluginExecutor(ctx.obj.plugins)
-    formatter = checks.CheckFormatter(format)
+    formatter = checks.CheckFormatter(format, verbose=ctx.obj.verbose)
     for result in executor.pre_checks():
         formatter.dump(result)
         if not result.ok:
