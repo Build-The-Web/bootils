@@ -42,9 +42,11 @@ def check(ctx, format, name):
     executor = loader.PluginExecutor(ctx.obj.plugins)
     formatter = checks.CheckFormatter(format, verbose=ctx.obj.verbose)
     for result in executor.pre_checks():
-        formatter.dump(result)
+        if not ctx.obj.quiet:
+            formatter.dump(result)
         if not result.ok:
             rc = 1
-    formatter.close()
+    if not ctx.obj.quiet:
+        formatter.close()
     if rc:
         sys.exit(rc)
