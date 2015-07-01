@@ -22,6 +22,7 @@ import sys
 import shlex
 
 import psutil
+from rudiments.humanize import bytes2iec
 
 from ..._compat import encode_filename
 from ..loader import PluginBase
@@ -57,11 +58,14 @@ def diskfree_result(spec):
         else:
             if usage.free < expected:
                 ok = False
-                diagnostics.append("violated {threshold} condition (free={free} {percent}%)"
-                                   .format(threshold=threshold, free=usage.free, percent=100.0 - usage.percent))
+                diagnostics.append("violated {threshold} condition ({percent:.1f}% {free} free)".format(
+                                   threshold=threshold, free=bytes2iec(usage.free, compact=True), percent=100.0 - usage.percent))
 
-    # TODO: format "usage" to IEC binary units (http://physics.nist.gov/cuu/Units/binary.html)
-    return ok, 'diskfree', '{spec} [{usage}]'.format(spec=spec, usage=usage), '\n'.join(diagnostics)
+    comment = '{spec} [{percent:.1f}% {free}/{total} free]'.format(
+              spec=spec, total=bytes2iec(usage.total, compact=True),
+              free=bytes2iec(usage.free, compact=True), percent=100.0 - usage.percent,
+    )
+    return ok, 'diskfree', comment, '\n'.join(diagnostics)
 
 
 class FileSystem(PluginBase):
