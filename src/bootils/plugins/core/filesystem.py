@@ -22,7 +22,7 @@ import sys
 import shlex
 
 import psutil
-from rudiments.humanize import bytes2iec
+from rudiments.humanize import bytes2iec, iec2bytes
 
 from ..._compat import encode_filename
 from ..loader import PluginBase
@@ -44,13 +44,10 @@ def diskfree_result(spec):
     ok = True
     for threshold in parts:
         try:
-            if threshold.isdigit():
-                expected = int(threshold, 10)
-            elif threshold.endswith('%'):
+            if threshold.endswith('%'):
                 expected = usage.total * int(threshold[:-1], 10) / 100.0
             else:
-                # XXX: add parsing for sizes with units
-                raise ValueError("Unknown format / not a number")
+                expected = iec2bytes(threshold)
         except (ValueError, TypeError) as cause:
             ok = False
             diagnostics.append("Unparsable threshold {threshold!r}: {cause}"
