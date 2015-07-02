@@ -59,7 +59,7 @@ The following is a hopefully pretty much self-explanatory and totally made up ex
 ```ini
 [pre-check]
 
-[[Machine]]
+[[Host]]
 packages = """
     oracle-java8-jre | oracle-java8-installer
     java-service-wrapper
