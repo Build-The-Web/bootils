@@ -9,6 +9,14 @@ bootils.commands package
 Submodules
 ----------
 
+bootils.commands.check module
+-----------------------------
+
+.. automodule:: bootils.commands.check
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 bootils.commands.help module
 ----------------------------
 

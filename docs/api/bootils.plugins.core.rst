@@ -17,4 +17,12 @@ bootils.plugins.core.filesystem module
     :undoc-members:
     :show-inheritance:
 
+bootils.plugins.core.host module
+--------------------------------
+
+.. automodule:: bootils.plugins.core.host
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 

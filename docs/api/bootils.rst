@@ -18,6 +18,14 @@ Subpackages
 Submodules
 ----------
 
+bootils.checks module
+---------------------
+
+.. automodule:: bootils.checks
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 bootils.config module
 ---------------------
 
