@@ -152,6 +152,7 @@ to make the necessary basic commands available on *Linux*, *Mac OS X*, and *Wind
  * [mirakuru](https://github.com/ClearcodeHQ/mirakuru) – Starts a process, and waits for clear indication that it's running.
  * [ianitor](https://github.com/ClearcodeHQ/ianitor) – Doorkeeper for Consul discovered services.
  * [supervisor](https://github.com/Supervisor/supervisor)
+ * [honcho](https://github.com/nickstenning/honcho)
  * [runit](http://smarden.org/runit/)
  * [systemd](http://www.freedesktop.org/wiki/Software/systemd/)
  * [upstart](http://upstart.ubuntu.com/)
