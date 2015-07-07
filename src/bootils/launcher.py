@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# pylint: disable=bad-continuation, unused-import
-""" CLI commands.
+# pylint: disable=bad-continuation
+""" Service launcher and processc control.
 """
 # Copyright ©  2015 1&1 Group <btw-users@googlegroups.com>
 #
@@ -17,7 +17,7 @@
 # limitations under the License.
 from __future__ import absolute_import, unicode_literals, print_function
 
-# Load the command modules for registration
-from . import help  # noqa pylint: disable=redefined-builtin
-from . import check
-from . import service
+import os
+import sys
+
+# from . import …
