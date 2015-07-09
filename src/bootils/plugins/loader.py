@@ -66,9 +66,11 @@ class PluginBase(object):
 
     def pre_check(self):
         """Perform pre-launch checks and generate results."""
+        return []
 
     def post_check(self):
         """Perform post-launch checks and generate results."""
+        return []
 
 
 class PluginContext(object):
