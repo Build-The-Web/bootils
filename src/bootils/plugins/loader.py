@@ -17,8 +17,6 @@
 # limitations under the License.
 from __future__ import absolute_import, unicode_literals, print_function
 
-import os
-import sys
 import inspect
 import pkgutil
 
@@ -49,6 +47,7 @@ class PluginBase(object):
 
     @property
     def name(self):
+        """Name of the plugin (e.g. for reporting)."""
         return self.__class__.__name__
 
     def cfg_list(self, key, section=None):

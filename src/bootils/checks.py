@@ -127,15 +127,18 @@ class CheckFormatter(object):
         return buf.getvalue()
 
     def write(self, text):
+        """Unbuffered write of given text to output stream."""
         self.stream.write(text)
         self.stream.flush()
 
     def dump(self, result):
+        """Print a single check result."""
         self.write(self.GLUE[self.formatting][1 if self.index else 0])
         self.write(self._formatter(result))
         self.index += 1
 
     def close(self):
+        """Print any trailing output and clean up resources."""
         self.write(self.GLUE[self.formatting][2])
         if self.formatting == 'tap':
             self.write('1..{}\n'.format(self.index))
