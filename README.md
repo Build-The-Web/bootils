@@ -163,3 +163,5 @@ to make the necessary basic commands available on *Linux*, *Mac OS X*, and *Wind
 
 [![1&1](https://raw.githubusercontent.com/1and1/1and1.github.io/master/images/1and1-logo-42.png)](https://github.com/1and1)
 Project sponsored by [1&1](https://github.com/1and1).
+
+Documentation hosted by [Read the Docs](https://readthedocs.org/).
