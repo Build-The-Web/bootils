@@ -77,7 +77,7 @@ class PyTest(TestCommand):
         self.test_suite = True
 
     def run_tests(self):
-        if 0 and os.environ.get('DH_VIRTUALENV_INSTALL_ROOT', None):
+        if os.environ.get('DH_VIRTUALENV_INSTALL_ROOT', None):
             return  # disable tests during dh-virtualenv build
 
         # import locally, cause outside the eggs aren't loaded

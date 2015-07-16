@@ -1,0 +1,5 @@
+bootils (0.1.0-1) trusty; urgency=low
+
+  * bootils: Initial debian packaging
+
+ -- Juergen Hermann <jh@web.de>  Thu, 16 Jul 2015 11:22:48 +0200

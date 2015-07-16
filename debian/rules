@@ -1,0 +1,29 @@
+#!/usr/bin/make -f
+#
+# Build Debian package using https://github.com/spotify/dh-virtualenv
+#
+# The below targets create a clean copy of the workdir via
+# using "sdist", else "pip" goes haywire when installing from
+# sourcedir ".", because that includes the debian build stage,
+# and a recursive explosion ensues when symlinks are followed.
+
+# Increase trace logging, see debhelper(7) (uncomment to enable)
+#DH_VERBOSE=1
+
+DH_VENV_ARGS=--with python-virtualenv --setuptools --python /usr/bin/python2 #-v
+EXTRA_REQUIREMENTS="setuptools>=17.1"
+
+clean:
+	test ! -d dist || rm -rf dist
+	test ! -d debian/sdist || rm -rf debian/sdist
+	dh $@ $(DH_VENV_ARGS)
+
+build-arch:
+	/usr/bin/python2 setup.py sdist --formats tar
+	mkdir -p debian/sdist
+	tar -x -C debian/sdist --strip-components=1 --exclude '*.egg-info' -f dist/*.tar
+	echo $(EXTRA_REQUIREMENTS) | tr ' ,' '\n\n' >>debian/sdist/requirements.txt
+	dh $@ $(DH_VENV_ARGS) --sourcedir debian/sdist
+
+%:
+	dh $@ $(DH_VENV_ARGS) --sourcedir debian/sdist
