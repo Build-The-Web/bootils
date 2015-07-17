@@ -34,4 +34,12 @@ bootils.config module
     :undoc-members:
     :show-inheritance:
 
+bootils.launcher module
+-----------------------
+
+.. automodule:: bootils.launcher
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 

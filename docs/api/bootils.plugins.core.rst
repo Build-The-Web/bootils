@@ -25,4 +25,12 @@ bootils.plugins.core.host module
     :undoc-members:
     :show-inheritance:
 
+bootils.plugins.core.jsw module
+-------------------------------
+
+.. automodule:: bootils.plugins.core.jsw
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 

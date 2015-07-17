@@ -25,4 +25,12 @@ bootils.commands.help module
     :undoc-members:
     :show-inheritance:
 
+bootils.commands.service module
+-------------------------------
+
+.. automodule:: bootils.commands.service
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 
