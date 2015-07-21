@@ -1,4 +1,4 @@
 bootils.*.debhelper
 bootils.substvars
-bootils/
+bootils-*/
 files
