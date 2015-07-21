@@ -1,4 +1,4 @@
-bootils (0.1.0-1) trusty; urgency=low
+bootils (0.1.0) trusty; urgency=low
 
   * bootils: Initial debian packaging
 
