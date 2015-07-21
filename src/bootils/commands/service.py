@@ -20,7 +20,10 @@ from __future__ import absolute_import, unicode_literals, print_function
 from rudiments.reamed import click
 
 from .. import config, launcher
+from ..plugins import loader
 
+
+# TODO: Implement all actions in "man 8 initctl" as sub-commands
 
 @config.cli.group()
 @click.argument('name', metavar='‹name›', nargs=1)
@@ -33,6 +36,7 @@ def service(ctx, name):
         if you have several defined on a machine.
     """
     # TODO: Implement config loading for named service
+    ctx.obj.executor = loader.PluginExecutor(ctx.obj.plugins)
 
 
 @service.command()
@@ -41,7 +45,8 @@ def start(ctx):
     """ Start a service.
     """
     print("Starting '{}'...".format(ctx.parent.params['name']))
-    # TODO: Implement service start
+    # TODO: Implicitly execute pre-checks
+    ctx.obj.executor.control('start')
 
 
 @service.command()
@@ -50,4 +55,4 @@ def stop(ctx):
     """ Stop a service.
     """
     print("Stopping '{}'...".format(ctx.parent.params['name']))
-    # TODO: Implement service stop
+    ctx.obj.executor.control('stop')

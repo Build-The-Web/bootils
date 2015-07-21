@@ -22,3 +22,12 @@ from ..loader import PluginBase
 
 class JavaServiceWrapper(PluginBase):
     """Tanuki Java Service Wrapper runtime environment."""
+
+    def control_start(self, *args, **options):
+        """Start a Java service."""
+        print("*** JSW START ***")
+        return True  # TODO: actually implement this
+
+    def control_stop(self, *args, **options):
+        """Stop a Java service."""
+        return False  # TODO: actually implement this

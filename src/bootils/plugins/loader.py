@@ -39,6 +39,10 @@ def _find_plugin_classes(modules):
 
 class PluginBase(object):
     """ Base class for plugins.
+
+        This class defines the plugin interface (callbacks), and provides
+        sensible default implementations so that a plugin only has
+        to define those callbacks it *needs* to override.
     """
 
     def __init__(self, context):
@@ -66,6 +70,21 @@ class PluginBase(object):
     def pre_check(self):
         """Perform pre-launch checks and generate results."""
         return []
+
+    def control(self, command, *args, **options):
+        """
+            Control a service / process.
+
+            This delegates to a ``control_‹command›`` method of a subclass, if one is found.
+
+            Returns:
+                bool: True if the command was handled successfully.
+        """
+        command_handler = getattr(self, 'control_' + command, None)
+        if command_handler:
+            return command_handler(*args, **options)
+        else:
+            return False
 
     def post_check(self):
         """Perform post-launch checks and generate results."""
@@ -138,6 +157,16 @@ class PluginExecutor(object):
         self.plugins = [cls(self.context) for cls in self.loader.discover()]
         self.configure()
 
+    def _delegate_with_yield(self, phase):
+        """ Delegate execution of a phase to all plugins, and yield any
+            generated results to the caller.
+        """
+        self.context.phase = phase
+        for plugin in self.plugins:
+            results = getattr(plugin, phase)()
+            for result in results:
+                yield result
+
     def configure(self):
         """Assemble configuration for each plugin and pass it on."""
         cfg = self.loader.cfg.load()
@@ -158,14 +187,22 @@ class PluginExecutor(object):
 
     def pre_checks(self):
         """Perform pre-launch checks."""
-        self.context.phase = 'pre_check'
+        for result in self._delegate_with_yield('pre_check'):
+            yield result
+
+    def control(self, command, *args, **options):
+        """ Delegates execution of the given command to all plugins,
+            until one of them indicates it handled the task.
+        """
+        self.context.phase = 'control_' + command
         for plugin in self.plugins:
-            for result in plugin.pre_check():
-                yield result
+            handled = plugin.control(command, *args, **options)
+            if handled:
+                break
+        else:
+            raise click.LoggedFailure("No active plugin supports the {} command!".format(command))
 
     def post_checks(self):
         """Perform post-launch checks."""
-        self.context.phase = 'post_check'
-        for plugin in self.plugins:
-            for result in plugin.post_check():
-                yield result
+        for result in self._delegate_with_yield('post_check'):
+            yield result
