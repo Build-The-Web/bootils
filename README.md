@@ -57,30 +57,6 @@ grep /.bash_completion.d/$cmdname.sh ~/.bash_completion >/dev/null \
 The following is a hopefully pretty much self-explanatory and totally made up example.
 
 ```ini
-[pre-check]
-
-[[Host]]
-packages = """
-    oracle-java8-jre | oracle-java8-installer
-    java-service-wrapper
-    jolokia-jvm-agent
-"""
-
-[[FileSystem]]
-
-exists = """
-    /etc/cassandra/jolokia-config.properties
-"""
-
-mounted = """
-    /mnt/data
-    /mnt/commitlog
-"""
-
-diskfree = """
-    /mnt/data 30% 500G
-"""
-
 [launcher]
 java-classpath = """
     /usr/share/java/commons-logging*.jar
