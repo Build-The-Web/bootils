@@ -23,6 +23,9 @@ it can also be triggered explicitely by using the ``check`` sub-command.
 If any requirement isn't satisfied, the return code will reflect that
 – use this together with the ``-q`` option to test them in scripts.
 
+The ``--pre`` and ``--post`` options can be used to select which checks
+to perform, if neither is given, *all* checks are active.
+
 Each check produces a result with the following attributes:
 ``ok`` (either ``true`` or ``false``),
 ``name`` (the qualfied name of the check),
