@@ -22,30 +22,11 @@ into a stable running state.
 
 ## Installation
 
-*Bootils* can be installed via ``pip install bootils`` as usual,
-see [releases](https://github.com/Build-The-Web/bootils/releases) for an overview of available versions.
-To get a bleeding-edge version from source, use these commands:
-
-```sh
-repo="Build-The-Web/bootils"
-pip install -r "https://raw.githubusercontent.com/$repo/master/requirements.txt"
-pip install -UI -e "git+https://github.com/$repo.git#egg=${repo#*/}"
-```
+Refer to the
+[Installation Guide](https://bootils.readthedocs.org/en/latest/install.html)
+on *Read The Docs*.
 
 See [Contributing](#contributing) on how to create a full development environment.
-
-To add bash completion, read the [Click docs](http://click.pocoo.org/4/bashcomplete/#activation) about it,
-or just follow these instructions:
-
-```sh
-cmdname=nanny
-mkdir -p ~/.bash_completion.d
-( export _$(tr a-z- A-Z_ <<<"$cmdname")_COMPLETE=source ; \
-  $cmdname >~/.bash_completion.d/$cmdname.sh )
-grep /.bash_completion.d/$cmdname.sh ~/.bash_completion >/dev/null \
-    || echo >>~/.bash_completion ". ~/.bash_completion.d/$cmdname.sh"
-. "/etc/bash_completion"
-```
 
 
 ## Usage
