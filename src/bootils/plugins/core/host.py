@@ -25,8 +25,8 @@ from ..loader import PluginBase
 class Host(PluginBase):
     """Host and OS checks."""
 
-    def pre_check(self):
-        """Perform pre-launch checks."""
+    def _check(self):
+        """Perform checks."""
         for pkg_spec in self.cfg_list('packages'):
             ok, status = False, None
             for pkg_name in pkg_spec.split('|'):
@@ -43,3 +43,6 @@ class Host(PluginBase):
                     ok = False
 
             yield self.result(ok, 'packages', pkg_spec, diagnostics=status)
+
+    pre_check = _check
+    post_check = _check

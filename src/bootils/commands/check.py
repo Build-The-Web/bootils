@@ -18,6 +18,7 @@
 from __future__ import absolute_import, unicode_literals, print_function
 
 import sys
+import itertools
 
 from rudiments.reamed import click
 
@@ -28,19 +29,30 @@ from ..plugins import loader
 @config.cli.command()
 @click.option('-f', '--format', type=click.Choice(checks.CHECK_RESULT_FORMATS), default=checks.CHECK_RESULT_FORMATS[0],
     help="Output format to use for reporting check results.")
+@click.option('--pre', is_flag=True, default=False, help="Perform 'pre' checks.")
+@click.option('--post', is_flag=True, default=False, help="Perform 'post' checks.")
 @click.argument('name', metavar='[‹name›]', nargs=1, default='default')
 @click.pass_context
-def check(ctx, format, name):
+def check(ctx, format, pre, post, name):
     """ Perform checks according to the service configuration.
 
         Provide the name of the service to check, otherwise 'default' is used.
-        The special name 'all' will perform checks for all configured services,
-        if you have several defined on a machine.
     """
+    # TODO: Use the 'name' argument (merge additional config file)
+    # TODO: The special name 'all' will perform checks for all configured services,
+    #       if you have several defined on a machine.
     rc = 0
     executor = loader.PluginExecutor(ctx.obj.plugins)
     formatter = checks.CheckFormatter(format, verbose=ctx.obj.verbose)
-    for result in executor.pre_checks():
+    checklist = []
+    if pre:
+        checklist.append(executor.pre_checks())
+    if post:
+        checklist.append(executor.post_checks())
+    if not checklist:
+        checklist = [executor.pre_checks(), executor.post_checks()]
+
+    for result in itertools.chain(*checklist):
         if not ctx.obj.quiet:
             formatter.dump(result)
         if not result.ok:

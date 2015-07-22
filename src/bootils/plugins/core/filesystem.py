@@ -68,8 +68,8 @@ def diskfree_result(spec):
 class FileSystem(PluginBase):
     """File system checks."""
 
-    def pre_check(self):
-        """Perform pre-launch checks."""
+    def _check(self):
+        """Perform checks."""
         ##import pprint; print('\n'.join(pprint.pformat(i) for i in self.cfg.items()))
 
         for path in self.cfg_list('exists'):
@@ -89,3 +89,6 @@ class FileSystem(PluginBase):
 
         for spec in self.cfg_list('diskfree'):
             yield self.result(*diskfree_result(spec))
+
+    pre_check = _check
+    post_check = _check

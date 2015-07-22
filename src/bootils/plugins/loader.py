@@ -61,7 +61,7 @@ class PluginBase(object):
 
     def result(self, ok, name, comment, diagnostics=None):
         """Create :py:ref:`checks.CheckResult` with a qualified name."""
-        return checks.CheckResult(ok, '{}:{}'.format(self.name, name), comment, diagnostics)
+        return checks.CheckResult(ok, '{}:{}[{}]'.format(self.name, name, self.context.phase), comment, diagnostics)
 
     def configure(self, config):
         """Store plugin-specific configuration."""
