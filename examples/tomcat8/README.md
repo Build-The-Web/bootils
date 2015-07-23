@@ -12,6 +12,9 @@ package is installed.
 
 **TODO**
 
+```sh
+apt-get install service-wrapper libservice-wrapper-doc
+```
 
 ## Starting
 
