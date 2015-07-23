@@ -1,6 +1,13 @@
 # -*- coding: utf-8 -*-
 # pylint: disable=
 """ Tanuki Java Service Wrapper runtime environment.
+
+    Debian JSW paths (Wheezy 3.5.3; Jessie 3.5.22)::
+
+        /usr/sbin/wrapper – ELF executable
+        /usr/share/wrapper/daemon.sh
+        /usr/share/wrapper/make-wrapper-init.sh
+        /usr/share/wrapper/wrapper.conf
 """
 # Copyright ©  2015 1&1 Group <btw-users@googlegroups.com>
 #
