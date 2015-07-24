@@ -27,7 +27,21 @@ and *Windows*.
 Installation as a Debian Package
 --------------------------------
 
-**TODO**
+Debian packages of release versions will eventually be available on
+`Bintray <https://bintray.com/jhermann/deb/bootils/>`_.
+Follow the instructions there to extend your *APT* configuration,
+update your package database with ``apt-get update``,
+and finally install the package using ``apt-get install bootils``.
+
+If you want to build your own package file directly from source,
+you need to follow these steps:
+
+ * `Install dh-virtualenv 0.8+ <http://dh-virtualenv.readthedocs.org/en/latest/tutorial.html>`_.
+ * `Create a working directory <https://github.com/Build-The-Web/bootils#contributing>`_.
+ * In the development environment, call ``invoke deb`` –
+   the built package files are placed in the ``dist`` directory.
+ * Optionally, upload the package to a local Debian repository,
+   e.g. `to Artifactory using dput <https://github.com/jhermann/artifactory-debian#package-uploading>`_.
 
 After installation, continue with the :doc:`quickstart`.
 
