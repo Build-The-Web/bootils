@@ -1,1 +1,1 @@
-usr/share/python/bootils/bin/nanny usr/bin/nanny
+opt/virtualenvs/bootils/bin/nanny usr/bin/nanny
