@@ -1,0 +1,3 @@
+---
+# ‘netcat’ service demo
+- include: netcat-demo.yml
