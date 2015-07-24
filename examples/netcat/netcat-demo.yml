@@ -2,4 +2,4 @@
 # Set up netcat service using bootils
 - hosts: nc-service
   roles:
-    - netcat_demo
+    - { role: netcat_demo, sudo: yes }

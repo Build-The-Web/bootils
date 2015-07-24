@@ -1,7 +1,8 @@
 ---
 - name: Install packages
-  sudo: yes
   apt: name={{ item }} state=latest
   with_items:
     - supervisor
     - netcat-openbsd
+- name: Install configuration files
+  copy: src=etc dest=/etc/bootils owner=root group=root mode=0644
