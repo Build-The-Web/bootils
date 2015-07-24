@@ -16,9 +16,6 @@ apt-get install ansible sshpass
 
 Other platforms should have similar packages.
 
-Also make sure you have set the ``ask_sudo_pass`` setting in
-``/etc/ansible/ansible.cfg`` to ``true``.
-
 
 ## Running the Playbook
 
