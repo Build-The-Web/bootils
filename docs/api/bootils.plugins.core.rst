@@ -9,6 +9,14 @@ bootils.plugins.core package
 Submodules
 ----------
 
+bootils.plugins.core.demon module
+---------------------------------
+
+.. automodule:: bootils.plugins.core.demon
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 bootils.plugins.core.filesystem module
 --------------------------------------
 
