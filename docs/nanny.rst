@@ -7,7 +7,7 @@ The ``nanny`` command acts on the :doc:`configuration of a service <cfg>`,
 by first checking any pre-launch requirements,
 starting it when those are OK,
 and then watching logs and other status indicators
-until it reachers a stable running state.
+until it reaches a stable running state.
 
 Use ``nanny --help`` to get a list of global options and sub-commands,
 ``nanny ‹command› --help`` for detailed help on a specific command and its options,
