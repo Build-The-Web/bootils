@@ -78,6 +78,20 @@ class FileSystem(PluginBase):
             except OSError as cause:
                 yield self.result(False, 'exists', path, diagnostics=str(cause))
 
+        for path in self.cfg_list('executable'):
+            try:
+                path_stat = os.stat(encode_filename(path))
+                r_mode = (path_stat.st_mode & 0o444)
+                x_mode = (path_stat.st_mode & 0o111)
+                errmsg = None
+                if not x_mode:
+                    errmsg = "not executable"
+                elif r_mode != (x_mode << 2):
+                    errmsg = "r?x' flag mismatch"
+                yield self.result(not errmsg, 'executable', path, diagnostics=errmsg)
+            except OSError as cause:
+                yield self.result(False, 'executable', path, diagnostics=str(cause))
+
         for path in self.cfg_list('mounted'):
             try:
                 mounted = not on_same_fs(path, '/')

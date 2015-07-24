@@ -48,7 +48,7 @@ Built-in Plugins
 FileSystem
 ^^^^^^^^^^
 
-This plugin allows to check that a certain path ``exists``
+This plugin allows to check that a certain path ``exists``, is ``executable``,
 or is ``mounted`` (i.e. not part of the root file-system).
 You can also check for free space of the volume of a given path using ``diskfree``.
 
@@ -65,6 +65,10 @@ Example::
     exists = """
         /etc/cassandra/jolokia-config.properties
         /etc/hosts
+    """
+
+    executable = """
+        /bin/bash
     """
 
     mounted = """
