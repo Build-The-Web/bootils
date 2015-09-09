@@ -9,6 +9,6 @@
   file: path=/etc/bootils state=directory owner=root group=root mode=0755
 
 - name: Install configuration files
-  copy: src=etc/{{ item }} dest=/etc/bootils owner=root group=root mode=0644
+  copy: src=etc/{{ item }} dest=/etc/bootils/{{ item }} owner=root group=root mode=0644
   with_items:
     - nanny.conf
