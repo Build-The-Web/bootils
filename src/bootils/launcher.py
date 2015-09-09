@@ -17,4 +17,33 @@
 # limitations under the License.
 from __future__ import absolute_import, unicode_literals, print_function
 
+import signal
+
 # from . import …
+
+
+def signal2int(sig_spec):
+    """ Convert given signal specification to its integer value.
+
+        Parameters:
+            sig_spec (int or str): Either already an int,
+                a number as a string, or a case-insensitive signal name.
+
+        Returns:
+            int: Signal number.
+
+        Raises:
+            ValueError: Bad / unknown signal name, or bad input type.
+    """
+    try:
+        signo = int(sig_spec)
+    except (TypeError, ValueError):
+        try:
+            sig_name = sig_spec.upper()
+            if not sig_name.startswith('SIG'):
+                sig_name = 'SIG' + sig_name
+            signo = getattr(signal, sig_name)
+        except (TypeError, ValueError, AttributeError):
+            raise ValueError('Bad signal specification {!r}'.format(sig_spec))
+
+    return signo
