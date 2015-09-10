@@ -88,4 +88,9 @@ about it, or just follow these instructions:
         || echo >>~/.bash_completion ". ~/.bash_completion.d/$cmdname.sh"
     . "/etc/bash_completion"
 
+.. note::
+
+    The Debian package already comes equipped with an appropriate snippet,
+    just make sure you have the ``bash-completion`` package installed.
+
 The :doc:`quickstart` describes the next steps.
