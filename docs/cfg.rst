@@ -106,7 +106,7 @@ were indeed installed by your configuration management tool.
 This provides explicit diagnostics
 (unlike e.g. a ``command not found`` for some missing tool),
 and avoids errors that might only appear
-when a service tries to accesss an optional component that was not installed.
+when a service tries to access an optional component that was not installed.
 
 Example::
 
