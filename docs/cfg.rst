@@ -103,3 +103,35 @@ Example::
         service-wrapper
         jolokia-jvm-agent
     """
+
+
+Network
+^^^^^^^
+
+The ``network`` plugin is able to check if all ports and addresses, that your
+server is going to use, are not already bound.
+
+Example (short-hand notation)::
+
+   [pre-check]
+
+   [[Network]]
+   ports = 80, 8081
+
+Example (verbose)::
+
+   [pre-check]
+
+   [[Network]]
+
+   [[[http]]]
+   port = 80
+   family = tcp
+   address = 0.0.0.0
+
+   [[[jmx_port]]]
+   port = 6379
+   family = tcp
+   address = 127.0.0.1
+
+
