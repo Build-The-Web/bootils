@@ -4,7 +4,7 @@
 
 click>=3.3,<4
 colorama
-psutil==2.2.1
+psutil>=3.0
 
 bunch==1.0.1
 configobj>=5.0,<6
