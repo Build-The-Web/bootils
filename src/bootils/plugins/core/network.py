@@ -32,8 +32,10 @@ class Network(PluginBase):
         ports = cfg.get('ports')
         if not ports:
             return
-        if isinstance(ports, str) or isinstance(ports, unicode):
-            ports = [ports]
+        try:
+            ports = [ports + '']
+        except (TypeError, ValueError):
+            pass # ports already iterable
 
         for port in ports:
             yield self._result('inet', None, port)
