@@ -30,15 +30,30 @@ Main Configuration Files
 ------------------------
 
 Configuration files are expected at the locations as shown by the ``nanny help``
-command, on a Linux system that is ``/etc/bootils/nanny.conf`` and ``~/.config/bootils/nanny.conf``.
+command, on a Linux system that is::
+
+    /etc/bootils/nanny.conf
+    /etc/bootils/nanny.d/*.conf
+    ~/.config/bootils/nanny.conf
+
 If you define the ``NANNY_CONFIG`` environment variable with additional files,
 those will be appended to the default list
-– try the ``NANNY_CONFIG=/tmp/foo.conf:/tmp/bar.conf nanny help`` command to see for yourself.
+– try this command to see for yourself::
+
+    NANNY_CONFIG=/tmp/foo.conf:/tmp/bar.conf nanny help
+
 Configuration files are merged in the given order, i.e. keys that appear in files
 further down the list shadow those in files read earlier.
 This allows you to provide general settings in the default files,
 and then modify and extend them for a specific service.
 
+Common usage patterns are to have everything in ``/etc/bootils/nanny.conf``
+if you only ever run a single service (say, in a Docker container), and
+use the ``conf.d`` directory for snippets of global configuration added by packages.
+If you run several services on one machine, keep ``nanny.conf`` clear of
+settings specific to any service, and use ``nanny.d/‹service›.conf`` files for those.
+In the service-specific files, be sure to qualify your top-level sections with the
+service name, e.g. ``[‹service›:pre-check]``.
 
 
 Built-in Plugins
