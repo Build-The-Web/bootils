@@ -5,10 +5,14 @@
     - supervisor
     - netcat-openbsd
 
-- name: Create configuration directory
-  file: path=/etc/bootils state=directory owner=root group=root mode=0755
-
-- name: Install configuration files
-  copy: src=etc/{{ item }} dest=/etc/bootils/{{ item }} owner=root group=root mode=0644
+- name: Create configuration directories
+  file: path=/etc/{{ item }} state=directory owner=root group=root mode=0755
   with_items:
-    - nanny.conf
+    - bootils
+    - bootils/nanny.d
+
+- name: Install global configuration file if absent
+  copy: src="etc/{{ item.name }}" dest="/etc/bootils/{{ item.name }}" owner=root group=root mode=0644 force="{{ item.force }}"
+  with_items:
+    - { name: nanny.conf, force: no }
+    - { name: nanny.d/netcat.conf, force: yes }
