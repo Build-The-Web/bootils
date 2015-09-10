@@ -21,6 +21,7 @@ import os
 import glob
 import inspect
 import pkgutil
+import importlib
 
 from bunch import Bunch
 from rudiments import pysupport
@@ -140,7 +141,8 @@ class PluginLoader(object):
         for _, name, is_pkg in pkgutil.iter_modules(core.__path__):
             if name.startswith('_') or is_pkg:
                 continue
-            modules.append(__import__(core.__name__ + '.' + name, globals(), {}, ['__file__']))
+            ## modules.append(__import__(core.__name__ + '.' + name, globals(), {}, ['__file__']))
+            modules.append(importlib.import_module('.' + name, core.__name__))
 
         # TODO: load custom plugins from entry points
 
