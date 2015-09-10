@@ -17,15 +17,18 @@
 # limitations under the License.
 from __future__ import absolute_import, unicode_literals, print_function
 
+import os
+import glob
 import inspect
 import pkgutil
 
 from bunch import Bunch
+from rudiments import pysupport
 from rudiments.reamed import click
 
 from .._compat import encode_filename as to_apistr
 from .. import checks
-from . import core
+from . import core, custom
 
 
 def _find_plugin_classes(modules):
@@ -140,7 +143,15 @@ class PluginLoader(object):
             modules.append(__import__(core.__name__ + '.' + name, globals(), {}, ['__file__']))
 
         # TODO: load custom plugins from entry points
-        # TODO: load custom plugins from plugin path
+
+        # Load custom plugins from plugin path
+        for path in self.searchpath:
+            for module in glob.glob(os.path.join(path, '*.py')):
+                if name.startswith('_'):
+                    continue
+
+                module_name = __name__.rsplit('.', 1)[0] + '.custom.' + os.path.splitext(os.path.basename(module))[0]
+                modules.append(pysupport.load_module(module_name, module))
 
         self._available = list(_find_plugin_classes(modules))
         return self._available
