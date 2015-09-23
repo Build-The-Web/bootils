@@ -114,6 +114,7 @@ to make the necessary basic commands available on *Linux*, *Mac OS X*, and *Wind
  * [systemd](http://www.freedesktop.org/wiki/Software/systemd/)
  * [upstart](http://upstart.ubuntu.com/)
  * [runc](https://github.com/opencontainers/runc)
+ * [dinit](https://github.com/miekg/dinit)
 
 
 ## Acknowledgements
