@@ -18,6 +18,9 @@
 # limitations under the License.
 from __future__ import absolute_import, unicode_literals, print_function
 
+import os
+import getpass
+
 import pytest
 
 from bootils import launcher
@@ -39,3 +42,24 @@ def test_signal2int_with_bad_name():
 def test_signal2int_with_bad_type():
     with pytest.raises(ValueError):
         launcher.signal2int(None)
+
+
+def test_uid_of_root():
+    assert launcher.check_uid(0) == 0
+    assert launcher.check_uid('0') == 0
+    assert launcher.check_uid('root') == 0
+
+
+def test_uid_of_current_user():
+    uid_home = os.stat(os.path.expanduser('~')).st_uid
+    assert launcher.check_uid(getpass.getuser()) == uid_home
+
+
+def test_gid_of_root():
+    assert launcher.check_gid(0) == 0
+    assert launcher.check_gid('0') == 0
+    assert launcher.check_gid('root') == 0
+
+
+def test_gid_of_users():
+    assert launcher.check_gid('users') > 0
