@@ -105,6 +105,7 @@ to make the necessary basic commands available on *Linux*, *Mac OS X*, and *Wind
 
 ## Similar and Related Projects
 
+ * [testinfra](https://github.com/philpep/testinfra) – Write unit tests with pytest to validate the actual state of your servers configured by CM tools.
  * [procdog](https://github.com/jlevy/procdog) – Lightweight command-line process control.
  * [mirakuru](https://github.com/ClearcodeHQ/mirakuru) – Starts a process, and waits for clear indication that it's running.
  * [ianitor](https://github.com/ClearcodeHQ/ianitor) – Doorkeeper for Consul discovered services.
