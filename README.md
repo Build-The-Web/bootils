@@ -16,14 +16,14 @@ for process and resource management, and a CLI tool named ``nanny`` that
 watches your child process after starting, until it grows up
 into a stable running state.
 
-:books: | For more details, see the full documentation at [Read The Docs](https://bootils.readthedocs.org/).
+:books: | For more details, see the full documentation at [Read The Docs](https://bootils.readthedocs.io/).
 ----: | :----
 
 
 ## Installation
 
 Refer to the
-[Installation Guide](https://bootils.readthedocs.org/en/latest/install.html)
+[Installation Guide](https://bootils.readthedocs.io/en/latest/install.html)
 on *Read The Docs*.
 
 See [Contributing](#contributing) on how to create a full development environment.
@@ -99,7 +99,7 @@ invoke build --docs test check
 ```
 
 You might also need to follow some
-[setup procedures](https://py-generic-project.readthedocs.org/en/latest/installing.html#quick-setup)
+[setup procedures](https://py-generic-project.readthedocs.io/en/latest/installing.html#quick-setup)
 to make the necessary basic commands available on *Linux*, *Mac OS X*, and *Windows*.
 
 
