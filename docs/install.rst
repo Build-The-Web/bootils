@@ -21,7 +21,7 @@ and *Windows*.
     distributions, too. The most important pre-requisite is availability
     of Python 2.7 or 3.4+.
 
-.. _`setup procedures`: https://py-generic-project.readthedocs.org/en/latest/installing.html#quick-setup
+.. _`setup procedures`: https://py-generic-project.readthedocs.io/en/latest/installing.html#quick-setup
 
 
 Installation as a Debian Package
@@ -36,7 +36,7 @@ and finally install the package using ``apt-get install bootils``.
 If you want to build your own package file directly from source,
 you need to follow these steps:
 
- * `Install dh-virtualenv 0.8+ <http://dh-virtualenv.readthedocs.org/en/latest/tutorial.html>`_.
+ * `Install dh-virtualenv 0.8+ <http://dh-virtualenv.readthedocs.io/en/latest/tutorial.html>`_.
  * `Create a working directory <https://github.com/Build-The-Web/bootils#contributing>`_.
  * In the development environment, call ``invoke deb`` –
    the built package files are placed in the ``dist`` directory.

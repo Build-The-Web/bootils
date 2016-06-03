@@ -21,7 +21,7 @@ Each section holds a list of key/value pairs.
     to represent this nested structure of sections and key/value pairs.
 
 
-.. _`ConfigObj Files`: https://configobj.readthedocs.org/en/latest/configobj.html#config-files
+.. _`ConfigObj Files`: https://configobj.readthedocs.io/en/latest/configobj.html#config-files
 
 
 .. _config-file:
@@ -148,5 +148,3 @@ Example (verbose)::
    port = 6379
    family = tcp
    address = 127.0.0.1
-
-

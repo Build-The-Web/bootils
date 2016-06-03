@@ -22,7 +22,7 @@ Important Links
 * `GitHub Project <https://github.com/Build-The-Web/bootils/>`_
 * `Issue Tracker <https://github.com/Build-The-Web/bootils/issues>`_
 * `PyPI <https://pypi.python.org/pypi/bootils>`_
-* `Latest Documentation <https://bootils.readthedocs.org/en/latest/>`_
+* `Latest Documentation <https://bootils.readthedocs.io/en/latest/>`_
 * `Google Group <https://groups.google.com/forum/#!forum/btw-users>`_
 
 
@@ -48,10 +48,10 @@ References
 
 **Tools**
 
-* `Cookiecutter <http://cookiecutter.readthedocs.org/en/latest/>`__
+* `Cookiecutter <https://cookiecutter.readthedocs.io/en/latest/>`__
 * `PyInvoke <http://www.pyinvoke.org/>`__
 * `pytest <http://pytest.org/latest/contents.html>`__
-* `tox <https://tox.readthedocs.org/en/latest/>`__
+* `tox <https://tox.readthedocs.io/en/latest/>`__
 * `Pylint <http://docs.pylint.org/>`__
 * `twine <https://github.com/pypa/twine#twine>`__
 * `bpython <http://docs.bpython-interpreter.org/>`__
