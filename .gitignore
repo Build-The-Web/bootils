@@ -67,3 +67,6 @@ target/
 
 # Jekyll
 _site/
+
+# Ansible
+secrets.yml
